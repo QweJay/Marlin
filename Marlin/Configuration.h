@@ -1,49 +1,49 @@
 /**
  * Marlin 3D Printer Firmware
  * Copyright (c) 2020 MarlinFirmware [https://github.com/MarlinFirmware/Marlin]
- *
+ * Translation from QwejayHuang [https://github.com/QweJay/Marlin]
  * Based on Sprinter and grbl.
  * Copyright (c) 2011 Camiel Gubbels / Erik van der Zalm
  *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ *此程序是免费软件：您可以重新分发和/或修改
+ *它遵循由GNU发布的GNU通用公共许可证的条款
+ *自由软件基金会，许可证的第3版，或
+ *（您可以选择）任何更高版本。
  *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
+ *分发此程序是希望它会有用，
+ *但无任何保证； 甚至没有默示担保
+ *特定目的的适销性或适用性。
+ *有关更多详细信息，请参见GNU通用公共许可证。
  *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
- */
-#pragma once
+ *您应该已经收到了GNU通用公共许可证的副本
+ *与该程序一起。 如果不是，请参见
+ *<http://www.gnu.org/licenses/>.
+ * /
+#一次编译
 
 /**
  * Configuration.h
  *
- * Basic settings such as:
+ *基本设置，例如：
  *
- * - Type of electronics
- * - Type of temperature sensor
- * - Printer geometry
- * - Endstop configuration
- * - LCD controller
- * - Extra features
+ *-电子类型
+ *-温度传感器
+ *-打印机结构
+ *-终端机配置
+ *-LCD控制器
+ *-额外功能
  *
- * Advanced settings can be found in Configuration_adv.h
+ *高级设置可以在Configuration_adv.h中找到
  *
  */
 #define CONFIGURATION_H_VERSION 020005
 
 //===========================================================================
-//============================= Getting Started =============================
+//============================= Getting Started 入门 ========================
 //===========================================================================
 
 /**
- * Here are some standard links for getting your machine calibrated:
+ * 以下是一些用于校准机器的标准链接:
  *
  * http://reprap.org/wiki/Calibration
  * http://youtu.be/wAL9d7FgInk
@@ -55,131 +55,126 @@
  */
 
 //===========================================================================
-//============================= DELTA Printer ===============================
+//============================= DELTA Printer 三角洲打印机===================
 //===========================================================================
-// For a Delta printer start with one of the configuration files in the
-// config/examples/delta directory and customize for your machine.
+// 对于Delta打印机，请从config/examples/delta中的配置文件开始并针对您的机器进行自定义。
+
+//===========================================================================
+//============================= SCARA Printer 机械臂3D打印机 ================
+//===========================================================================
+// 对于SCARA打印机，请从config/examples/SCARA中的配置文件开始并针对您的机器进行自定义。
 //
 
-//===========================================================================
-//============================= SCARA Printer ===============================
-//===========================================================================
-// For a SCARA printer start with the configuration files in
-// config/examples/SCARA and customize for your machine.
-//
+// @栏目信息
 
-// @section info
-
-// Author info of this build printed to the host during boot and M115
-#define STRING_CONFIG_H_AUTHOR "(none, default config)" // Who made the changes.
-//#define CUSTOM_VERSION_FILE Version.h // Path from the root directory (no quotes)
+// 在引导期间，此版本的作者信息会打印到主机上
+#define STRING_CONFIG_H_AUTHOR "(none, default config)" // 谁进行了更改.
+//#define CUSTOM_VERSION_FILE Version.h // 根目录的路径（无引号）
 
 /**
- * *** VENDORS PLEASE READ ***
+ * *** 供应商请阅读***
  *
- * Marlin allows you to add a custom boot image for Graphical LCDs.
- * With this option Marlin will first show your custom screen followed
- * by the standard Marlin logo with version number and web URL.
- *
- * We encourage you to take advantage of this new feature and we also
- * respectfully request that you retain the unmodified Marlin boot screen.
- */
+ * Marlin允许您为图形LCD添加自定义启动映像。
+ * 使用此选项，Marlin首先显示您的自定义屏幕。
+ * 由带有版本号和Web URL的标准Marlin徽标组成。
+ *
+ * 我们鼓励您利用这项新功能。
+ * 谨请您保留未经修改的Marlin引导屏幕。
+ * /
 
-// Show the Marlin bootscreen on startup. ** ENABLE FOR PRODUCTION **
+// 启动时显示Marlin引导屏幕。 **可以生产**
 #define SHOW_BOOTSCREEN
 
-// Show the bitmap in Marlin/_Bootscreen.h on startup.
+// 启动时在Marlin/_Bootscreen.h中显示位图。
 //#define SHOW_CUSTOM_BOOTSCREEN
 
-// Show the bitmap in Marlin/_Statusscreen.h on the status screen.
+// 启动时在Marlin/_Statusscreen.h中的状态屏幕上显示位图。
 //#define CUSTOM_STATUS_SCREEN_IMAGE
 
-// @section machine
+// @切片机
 
 /**
- * Select the serial port on the board to use for communication with the host.
- * This allows the connection of wireless adapters (for instance) to non-default port pins.
- * Serial port -1 is the USB emulated serial port, if available.
- * Note: The first serial port (-1 or 0) will always be used by the Arduino bootloader.
+ * 选择用于与主机通信的串行端口。
+ * 这样可以将无线适配器连接到非默认端口引脚。
+ * 串行端口-1是USB模拟的串行端口（如果可用）。
+ * 注意：Arduino 引导加载程序将始终使用第一个串行端口（-1 或 0）。
  *
  * :[-1, 0, 1, 2, 3, 4, 5, 6, 7]
  */
 #define SERIAL_PORT 0
 
 /**
- * Select a secondary serial port on the board to use for communication with the host.
+ * 选择板上的辅助串行端口，用于与主机通信。
  * :[-1, 0, 1, 2, 3, 4, 5, 6, 7]
  */
 //#define SERIAL_PORT_2 -1
 
 /**
- * This setting determines the communication speed of the printer.
+ * 此设置确定打印机的通信速度。
  *
- * 250000 works in most cases, but you might try a lower speed if
- * you commonly experience drop-outs during host printing.
- * You may try up to 1000000 to speed up SD file transfer.
+ * 250000 在大多数情况下有效，但如果在打印过程中，您通常遇到丢失打印机。
+ * 您可以尝试 1000000 的通信速度以提高 SD 文件的传输速度。
  *
- * :[2400, 9600, 19200, 38400, 57600, 115200, 250000, 500000, 1000000]
+ * 参考通信速度:[2400, 9600, 19200, 38400, 57600, 115200, 250000, 500000, 1000000]
  */
-#define BAUDRATE 250000
+#define BAUDRATE 250000   //通信波特率设置
 
-// Enable the Bluetooth serial interface on AT90USB devices
+// 在 AT90USB 设备上启用蓝牙串行接口
 //#define BLUETOOTH
 
-// Choose the name from boards.h that matches your setup
+// 从boards.h中选择与您的设置匹配的名称
 #ifndef MOTHERBOARD
   #define MOTHERBOARD BOARD_RAMPS_14_EFB
 #endif
 
-// Name displayed in the LCD "Ready" message and Info menu
+// LCD“就绪”消息和“信息”菜单中显示的名称
 //#define CUSTOM_MACHINE_NAME "3D Printer"
 
-// Printer's unique ID, used by some programs to differentiate between machines.
-// Choose your own or use a service like http://www.uuidgenerator.net/version4
-//#define MACHINE_UUID "00000000-0000-0000-0000-000000000000"
+// 打印机的唯一ID，某些程序使用它来区分机器。
+// 选择自己的服务或使用类似的服务 http://www.uuidgenerator.net/version4
+//#define MACHINE_UUID "b4a5990a-6d42-4254-a794-28395c4efb7c"
 
-// @section extruder
+// @挤出机
 
-// This defines the number of extruders
+// 这定义了挤出机的数量
 // :[1, 2, 3, 4, 5, 6, 7, 8]
-#define EXTRUDERS 1
+#define EXTRUDERS 1  //挤出机数量
 
-// Generally expected filament diameter (1.75, 2.85, 3.0, ...). Used for Volumetric, Filament Width Sensor, etc.
+// 一般的直径有（1.75, 2.85, 3.0, ...）用于体积、丝宽传感器等。
 #define DEFAULT_NOMINAL_FILAMENT_DIA 3.0
 
-// For Cyclops or any "multi-extruder" that shares a single nozzle.
+// 用于multi-extruder或任何共用一个喷嘴的“多挤出机”。
 //#define SINGLENOZZLE
 
 /**
- * Průša MK2 Single Nozzle Multi-Material Multiplexer, and variants.
+ * Průša MK2型单喷嘴多材料多路复用器或者变体。
  *
- * This device allows one stepper driver on a control board to drive
- * two to eight stepper motors, one at a time, in a manner suitable
- * for extruders.
+ * 该设备允许一个步进驱动器在控制板上驱动两个至八个合适的步进电机，
+ * 每次一个挤压机。
  *
- * This option only allows the multiplexer to switch on tool-change.
- * Additional options to configure custom E moves are pending.
- */
+ * 此选项只允许多路复用器打开工具更改。
+ * 正在等待配置自定义E步的其他选项。
+ * /
 //#define MK2_MULTIPLEXER
 #if ENABLED(MK2_MULTIPLEXER)
-  // Override the default DIO selector pins here, if needed.
-  // Some pins files may provide defaults for these pins.
-  //#define E_MUX0_PIN 40  // Always Required
-  //#define E_MUX1_PIN 42  // Needed for 3 to 8 inputs
-  //#define E_MUX2_PIN 44  // Needed for 5 to 8 inputs
+  // 如果需要，请在此处覆盖默认 DIO 选择器引脚。
+  // 某些引脚文件可能会提供这些引脚的默认值。
+  //#define E_MUX0_PIN 40  // 始终需要
+  //#define E_MUX1_PIN 42  // 需要 3 到 8 个输入
+  //#define E_MUX2_PIN 44  // 需要 5 到 8 个输入
 #endif
 
 /**
- * Prusa Multi-Material Unit v2
+ * 普鲁萨多材料单元 v2
  *
- * Requires NOZZLE_PARK_FEATURE to park print head in case MMU unit fails.
- * Requires EXTRUDERS = 5
+ * 在 MMU 单元发生故障时，需要NOZZLE_PARK_FEATURE驻留打印头。
+ * 需要挤出机 = 5
  *
- * For additional configuration see Configuration_adv.h
+ * 有关其他配置，请参阅 Configuration_adv.h
  */
 //#define PRUSA_MMU2
 
-// A dual extruder that uses a single stepper motor
+// 使用单个步进电机的双挤出机
 //#define SWITCHING_EXTRUDER
 #if ENABLED(SWITCHING_EXTRUDER)
   #define SWITCHING_EXTRUDER_SERVO_NR 0
@@ -189,7 +184,7 @@
   #endif
 #endif
 
-// A dual-nozzle that uses a servomotor to raise/lower one (or both) of the nozzles
+// 使用伺服电机来升高/降低一个（或两个）喷嘴的双喷嘴
 //#define SWITCHING_NOZZLE
 #if ENABLED(SWITCHING_NOZZLE)
   #define SWITCHING_NOZZLE_SERVO_NR 0
@@ -198,8 +193,8 @@
 #endif
 
 /**
- * Two separate X-carriages with extruders that connect to a moving part
- * via a solenoid docking mechanism. Requires SOL1_PIN and SOL2_PIN.
+ * 两个独立的x轴，带有连接移动部件的挤出机
+ * 通过螺线管对接机构。需要 SOL1_PIN 和 SOL2_PIN。
  */
 //#define PARKING_EXTRUDER
 
@@ -238,27 +233,27 @@
 #endif
 
 /**
- * Switching Toolhead
+ * 换刀夹
  *
- * Support for swappable and dockable toolheads, such as
- * the E3D Tool Changer. Toolheads are locked with a servo.
+ * 支持可切换和可停靠的工具头，例如
+ * E3D换刀器。工具头被伺服系统锁定。
  */
 //#define SWITCHING_TOOLHEAD
 
 /**
- * Magnetic Switching Toolhead
+ * 磁性切换刀头
  *
- * Support swappable and dockable toolheads with a magnetic
- * docking mechanism using movement and no servo.
+ * 支持更换和停靠工具头与磁
+ * 对接机构采用运动，无伺服。
  */
 //#define MAGNETIC_SWITCHING_TOOLHEAD
 
 /**
- * Electromagnetic Switching Toolhead
+ * 电磁开关刀头
  *
  * Parking for CoreXY / HBot kinematics.
- * Toolheads are parked at one edge and held with an electromagnet.
- * Supports more than 2 Toolheads. See https://youtu.be/JolbsAKTKf4
+ * 刀头停在一侧，用电磁铁固定。
+ * 支持超过2个工具头，参见https://youtu.be/JolbsAKTKf4
  */
 //#define ELECTROMAGNETIC_SWITCHING_TOOLHEAD
 
@@ -286,70 +281,70 @@
 #endif
 
 /**
- * "Mixing Extruder"
- *   - Adds G-codes M163 and M164 to set and "commit" the current mix factors.
- *   - Extends the stepping routines to move multiple steppers in proportion to the mix.
- *   - Optional support for Repetier Firmware's 'M164 S<index>' supporting virtual tools.
- *   - This implementation supports up to two mixing extruders.
- *   - Enable DIRECT_MIXING_IN_G1 for M165 and mixing in G1 (from Pia Taubert's reference implementation).
+ *“混合挤出机”
+ *-添加G代码M163和M164来设置和“提交”当前的混合因子。
+ *-扩展步进例程以根据混合比例移动多个步进器。
+ *-对Repetier固件的'M164 S <index>'支持的虚拟工具的可选支持。
+ *-此实现最多支持两个混合挤出机。
+ *-为M165启用DIRECT_MIXING_IN_G1并在G1中混合（来自Pia Taubert的参考实现）。
  */
 //#define MIXING_EXTRUDER
 #if ENABLED(MIXING_EXTRUDER)
-  #define MIXING_STEPPERS 2        // Number of steppers in your mixing extruder
-  #define MIXING_VIRTUAL_TOOLS 16  // Use the Virtual Tool method with M163 and M164
-  //#define DIRECT_MIXING_IN_G1    // Allow ABCDHI mix factors in G1 movement commands
-  //#define GRADIENT_MIX           // Support for gradient mixing with M166 and LCD
+  #define MIXING_STEPPERS 2        // 混合挤出机中步进机的数量
+  #define MIXING_VIRTUAL_TOOLS 16  // 对M163和M164使用虚拟工具方法
+  //#define DIRECT_MIXING_IN_G1    // 在G1运动命令中允许ABCDHI混合因子
+  //#define GRADIENT_MIX           // 支持与M166和LCD进行梯度混合
   #if ENABLED(GRADIENT_MIX)
-    //#define GRADIENT_VTOOL       // Add M166 T to use a V-tool index as a Gradient alias
+    //#define GRADIENT_VTOOL       // 添加M166 T以使用V-tool索引作为渐变别名
   #endif
 #endif
 
-// Offset of the extruders (uncomment if using more than one and relying on firmware to position when changing).
-// The offset has to be X=0, Y=0 for the extruder 0 hotend (default extruder).
-// For the other hotends it is their distance from the extruder 0 hotend.
+//挤出机的偏移量（如果使用多个挤出机，并且在更换时依靠固件来定位，则不予注释）。
+//对于挤出机0 hotend（默认挤出机），偏移量必须为X = 0，Y = 0。
+//对于其他加热头，它们是与挤出机0热点的距离。
 //#define HOTEND_OFFSET_X { 0.0, 20.00 } // (mm) relative X-offset for each nozzle
 //#define HOTEND_OFFSET_Y { 0.0, 5.00 }  // (mm) relative Y-offset for each nozzle
 //#define HOTEND_OFFSET_Z { 0.0, 0.00 }  // (mm) relative Z-offset for each nozzle
 
-// @section machine
+// @切片机
 
 /**
- * Power Supply Control
+ * 电源控制
  *
- * Enable and connect the power supply to the PS_ON_PIN.
- * Specify whether the power supply is active HIGH or active LOW.
+ * 启用电源并将其连接到PS_ON_PIN。
+ * 指定电源是有源高电平还是有源低电平。
  */
 //#define PSU_CONTROL
 //#define PSU_NAME "Power Supply"
 
 #if ENABLED(PSU_CONTROL)
-  #define PSU_ACTIVE_HIGH false     // Set 'false' for ATX, 'true' for X-Box
+  #define PSU_ACTIVE_HIGH false     // 为ATX设置“false”，为X-Box设置“true”
 
-  //#define PSU_DEFAULT_OFF         // Keep power off until enabled directly with M80
-  //#define PSU_POWERUP_DELAY 100   // (ms) Delay for the PSU to warm up to full power
+  //#define PSU_DEFAULT_OFF         // 关闭电源，直到M80直接启用
+  //#define PSU_POWERUP_DELAY 100   // (ms)延迟PSU升温至全功率
 
-  //#define AUTO_POWER_CONTROL      // Enable automatic control of the PS_ON pin
+  //#define AUTO_POWER_CONTROL      // 启用PS_ON引脚的自动控制
   #if ENABLED(AUTO_POWER_CONTROL)
-    #define AUTO_POWER_FANS         // Turn on PSU if fans need power
+    #define AUTO_POWER_FANS         // 如果风扇需要电力，打开PSU
     #define AUTO_POWER_E_FANS
     #define AUTO_POWER_CONTROLLERFAN
     #define AUTO_POWER_CHAMBER_FAN
-    //#define AUTO_POWER_E_TEMP        50 // (°C) Turn on PSU over this temperature
-    //#define AUTO_POWER_CHAMBER_TEMP  30 // (°C) Turn on PSU over this temperature
+    //#define AUTO_POWER_E_TEMP        50 // (℃)在此温度下打开PSU
+    //#define AUTO_POWER_CHAMBER_TEMP  30 // (℃)在此温度下打开PSU
     #define POWER_TIMEOUT 30
   #endif
 #endif
 
-// @section temperature
+// @温控部分
 
 //===========================================================================
-//============================= Thermal Settings ============================
+//============================= Thermal Settings 温控设定 ===================
 //===========================================================================
 
 /**
  * --NORMAL IS 4.7kohm PULLUP!-- 1kohm pullup can be used on hotend sensor, using correct resistor and table
  *
- * Temperature sensors available:
+ * 提供温度传感器:
  *
  *    -5 : PT100 / PT1000 with MAX31865 (only for sensors 0-1)
  *    -3 : thermocouple with MAX31855 (only for sensors 0-1)
@@ -418,25 +413,30 @@
 #define TEMP_SENSOR_PROBE 0
 #define TEMP_SENSOR_CHAMBER 0
 
-// Dummy thermistor constant temperature readings, for use with 998 and 999
+// 上面这些值是温度传感器类型配置，是能否正常读取温度的重要参数。
+// TEMP_SENSOR_0是喷嘴温度传感器
+// TEMP_SENSOR_BED是热床温度传感器，配置为1说明两个都是100K ntc热敏电阻。
+// 如果你使用了其它温度传感器需要根据情况自行更改。如果没有，配置为0
+
+// 虚拟热敏电阻恒温读数，用于998和999
 #define DUMMY_THERMISTOR_998_VALUE 25
 #define DUMMY_THERMISTOR_999_VALUE 100
 
-// Use temp sensor 1 as a redundant sensor with sensor 0. If the readings
-// from the two sensors differ too much the print will be aborted.
+// 使用温度传感器 1 作为传感器 0 的冗余传感器
+// 使用温度传感器 1 作为传感器 0 的冗余传感器。如果两个传感器的读数差异过大，打印将中止。
 //#define TEMP_SENSOR_1_AS_REDUNDANT
 #define MAX_REDUNDANT_TEMP_SENSOR_DIFF 10
 
-#define TEMP_RESIDENCY_TIME     10  // (seconds) Time to wait for hotend to "settle" in M109
-#define TEMP_WINDOW              1  // (°C) Temperature proximity for the "temperature reached" timer
-#define TEMP_HYSTERESIS          3  // (°C) Temperature proximity considered "close enough" to the target
+#define TEMP_RESIDENCY_TIME     10  // （秒）等待热端在 M109 中"稳定"的时间
+#define TEMP_WINDOW              1  // （°C）"温度达到"计时器的温度接近度
+#define TEMP_HYSTERESIS          3  // （°C）温度接近被认为"足够接近"目标
 
-#define TEMP_BED_RESIDENCY_TIME 10  // (seconds) Time to wait for bed to "settle" in M190
-#define TEMP_BED_WINDOW          1  // (°C) Temperature proximity for the "temperature reached" timer
-#define TEMP_BED_HYSTERESIS      3  // (°C) Temperature proximity considered "close enough" to the target
+#define TEMP_BED_RESIDENCY_TIME 10  // （秒）时间等待床"定居"在M190
+#define TEMP_BED_WINDOW          1  // （°C）"温度达到"计时器的温度接近度
+#define TEMP_BED_HYSTERESIS      3  // （°C）温度接近被认为"足够接近"目标
 
-// Below this temperature the heater will be switched off
-// because it probably indicates a broken thermistor wire.
+// 低于此温度的加热器将关闭
+// 因为它可能表示热敏电阻线断裂。
 #define HEATER_0_MINTEMP   5
 #define HEATER_1_MINTEMP   5
 #define HEATER_2_MINTEMP   5
@@ -447,9 +447,9 @@
 #define HEATER_7_MINTEMP   5
 #define BED_MINTEMP        5
 
-// Above this temperature the heater will be switched off.
-// This can protect components from overheating, but NOT from shorts and failures.
-// (Use MINTEMP for thermistor short/failure protection.)
+// 高于此温度，加热器将关闭。
+// 这可以保护组件免受过热的影响，但不能防止短路和故障。
+// （使用 MinTEMP 进行热敏电阻短路/故障保护)。
 #define HEATER_0_MAXTEMP 275
 #define HEATER_1_MAXTEMP 275
 #define HEATER_2_MAXTEMP 275
@@ -461,27 +461,26 @@
 #define BED_MAXTEMP      150
 
 //===========================================================================
-//============================= PID Settings ================================
+//============================= PID Settings PID 设置 =======================
 //===========================================================================
-// PID Tuning Guide here: http://reprap.org/wiki/PID_Tuning
+// PID 调整指南: http://reprap.org/wiki/PID_Tuning
 
-// Comment the following line to disable PID and enable bang-bang.
+// 注释下面的行来禁用PID并启用bang-bang。
 #define PIDTEMP
-#define BANG_MAX 255     // Limits current to nozzle while in bang-bang mode; 255=full current
-#define PID_MAX BANG_MAX // Limits current to nozzle while PID is active (see PID_FUNCTIONAL_RANGE below); 255=full current
-#define PID_K1 0.95      // Smoothing factor within any PID loop
+#define BANG_MAX 255     //在bang-bang模式下将限制喷嘴电流； 255 = 全电流
+#define PID_MAX BANG_MAX //在PID激活时将限制喷嘴电流（请参见下面的PID_FUNCTIONAL_RANGE）； 255 = 全电流
+#define PID_K1 0.95      // 在任何PID循环中的平滑因子
 #if ENABLED(PIDTEMP)
-  //#define PID_EDIT_MENU         // Add PID editing to the "Advanced Settings" menu. (~700 bytes of PROGMEM)
-  //#define PID_AUTOTUNE_MENU     // Add PID auto-tuning to the "Advanced Settings" menu. (~250 bytes of PROGMEM)
-  //#define PID_DEBUG             // Sends debug data to the serial port. Use 'M303 D' to toggle activation.
-  //#define PID_OPENLOOP 1        // Puts PID in open loop. M104/M140 sets the output power from 0 to PID_MAX
-  //#define SLOW_PWM_HEATERS      // PWM with very low frequency (roughly 0.125Hz=8s) and minimum state time of approximately 1s useful for heaters driven by a relay
-  //#define PID_PARAMS_PER_HOTEND // Uses separate PID parameters for each extruder (useful for mismatched extruders)
-                                  // Set/get with gcode: M301 E[extruder number, 0-2]
-  #define PID_FUNCTIONAL_RANGE 10 // If the temperature difference between the target temperature and the actual temperature
-                                  // is more than PID_FUNCTIONAL_RANGE then the PID will be shut off and the heater will be set to min/max.
+  //#define PID_EDIT_MENU         // 将PID编辑添加到“高级设置”菜单。(~700字节PROGMEM)
+  //#define PID_AUTOTUNE_MENU     // 在“高级设置”菜单中添加PID自动调整。(~250字节PROGMEM)
+  //#define PID_DEBUG             // 将调试数据发送到串口。使用'M303 D'切换激活。
+  //#define PID_OPENLOOP 1        // 将 PID 置于打开循环中。M104/M140 将输出功率从 0 设置到 PID_MAX
+  //#define SLOW_PWM_HEATERS      // PWM 具有极低频率（约 0.125Hz=8s）和大约 1s 的最小状态时间，适用于由继电器驱动的加热器
+  //#define PID_PARAMS_PER_HOTEND // 为每个挤出机使用单独的 PID 参数（对于不匹配的挤出机很有用）
+                                  // 使用G代码设置/获取：M301 E_挤出机编号，0-2]
+  #define PID_FUNCTIONAL_RANGE 10 // 如果目标温度和实际温度之间的温差超过PID_FUNCTIONAL_RANGE然后PID将关闭，加热器将设置为最小/最大。
 
-  // If you are using a pre-configured hotend then you can use one of the value sets by uncommenting it
+  // 如果使用预配置的 hotend，则可以通过取消注释来使用其中一个值集
 
   // Ultimaker
   #define DEFAULT_Kp 22.2
@@ -501,37 +500,34 @@
 #endif // PIDTEMP
 
 //===========================================================================
-//====================== PID > Bed Temperature Control ======================
+//============ PID > Bed Temperature Control PID 热床温度控制 ===============
 //===========================================================================
 
 /**
- * PID Bed Heating
+ *热床加热 PID 
  *
- * If this option is enabled set PID constants below.
- * If this option is disabled, bang-bang will be used and BED_LIMIT_SWITCHING will enable hysteresis.
+ * 如果启用此选项，请设置下面的PID常量。
+ * 如果禁用此选项，将使用bang-bang，并且bed_limit_switch将启用滞后。
  *
- * The PID frequency will be the same as the extruder PWM.
- * If PID_dT is the default, and correct for the hardware/configuration, that means 7.689Hz,
- * which is fine for driving a square wave into a resistive load and does not significantly
- * impact FET heating. This also works fine on a Fotek SSR-10DA Solid State Relay into a 250W
- * heater. If your configuration is significantly different than this and you don't understand
- * the issues involved, don't use bed PID until someone else verifies that your hardware works.
+ * PID频率将与挤出机PWM相同。如果PID_dT是默认值，并且硬件/配置正确，将使用7.689Hz，
+ * 这对于将方波驱动到电阻负载中没有太大的影响。这同样适用于Fotek SSR-10DA固态继电器到250W加热器上。
+ * 如果您的配置与此明显不同，并且您不了解所涉及的问题，那么在其他人验证您的硬件正常工作之前不要使用bed PID。
  */
 //#define PIDTEMPBED
 
 //#define BED_LIMIT_SWITCHING
 
 /**
- * Max Bed Power
- * Applies to all forms of bed control (PID, bang-bang, and bang-bang with hysteresis).
- * When set to any value below 255, enables a form of PWM to the bed that acts like a divider
- * so don't use it unless you are OK with PWM on your bed. (See the comment on enabling PIDTEMPBED)
+ * 热床最大功率
+ * 适用于所有形式的床控制（PID，bang-bang和带滞回的bang-bang）。
+ * 当设置为低于255的任何值时，将对床启用一种形式的PWM，其作用类似于分频器
+ * 因此，除非您可以在床上使用PWM，否则请不要使用它。 （请参阅有关启用PIDTEMPBED的注释）
  */
-#define MAX_BED_POWER 255 // limits duty cycle to bed; 255=full current
+#define MAX_BED_POWER 255 // 将工作周期限制在床上;255 = 全电流
 
 #if ENABLED(PIDTEMPBED)
   //#define MIN_BED_POWER 0
-  //#define PID_BED_DEBUG // Sends debug data to the serial port.
+  //#define PID_BED_DEBUG // 将调试数据发送到串口。
 
   //120V 250W silicone heater into 4mm borosilicate (MendelMax 1.5+)
   //from FOPDT model - kp=.39 Tp=405 Tdead=66, Tc set to 79.2, aggressive factor of .15 (vs .1, 1, 10)
@@ -545,57 +541,51 @@
   //#define DEFAULT_bedKi 1.41
   //#define DEFAULT_bedKd 1675.16
 
-  // FIND YOUR OWN: "M303 E-1 C8 S90" to run autotune on the bed at 90 degreesC for 8 cycles.
+  // 找到你自己的:“M303 E-1 C8 S90”在床上运行自动调整在90度，为8个周期。
 #endif // PIDTEMPBED
 
-// @section extruder
+// @挤出机部分
 
 /**
- * Prevent extrusion if the temperature is below EXTRUDE_MINTEMP.
- * Add M302 to set the minimum extrusion temperature and/or turn
- * cold extrusion prevention on and off.
+ * 如果温度低于EXTRUDE_MINTEMP，则防止挤出。
+ * 添加M302设置最小挤出温度和/或转向
+ * 防止冷挤压断续。
  *
- * *** IT IS HIGHLY RECOMMENDED TO LEAVE THIS OPTION ENABLED! ***
+ * ***强烈建议启用此选项!***
  */
 #define PREVENT_COLD_EXTRUSION
 #define EXTRUDE_MINTEMP 170
 
 /**
- * Prevent a single extrusion longer than EXTRUDE_MAXLENGTH.
- * Note: For Bowden Extruders make this large enough to allow load/unload.
+ * 防止一次挤压超过EXTRUDE_MINTEMP。
+ * 注意:对于Bowden挤出机来说，这个尺寸足够大，可以进行加载/卸载。
  */
 #define PREVENT_LENGTHY_EXTRUDE
 #define EXTRUDE_MAXLENGTH 200
 
 //===========================================================================
-//======================== Thermal Runaway Protection =======================
+//=============== Thermal Runaway Protection 热失控保护======================
 //===========================================================================
 
 /**
- * Thermal Protection provides additional protection to your printer from damage
- * and fire. Marlin always includes safe min and max temperature ranges which
- * protect against a broken or disconnected thermistor wire.
+ * 热保护提供额外保护，您的打印机免受损坏和火灾。
+ * Marlin始终包括安全的最低和最高温度范围，以保护损坏或断开热敏电阻线。
+ * 问题:如果热敏电阻掉了，它会报告房间里的空气温度低了很多，固件会让加热器继续工作。
  *
- * The issue: If a thermistor falls out, it will report the much lower
- * temperature of the air in the room, and the the firmware will keep
- * the heater on.
- *
- * If you get "Thermal Runaway" or "Heating failed" errors the
- * details can be tuned in Configuration_adv.h
+ * 如果你得到“热失控”或“加热失败”的错误可以在Configuration_adv.h中优化细节
  */
 
-#define THERMAL_PROTECTION_HOTENDS // Enable thermal protection for all extruders
-#define THERMAL_PROTECTION_BED     // Enable thermal protection for the heated bed
-#define THERMAL_PROTECTION_CHAMBER // Enable thermal protection for the heated chamber
+#define THERMAL_PROTECTION_HOTENDS // 为所有挤出机提供热保护
+#define THERMAL_PROTECTION_BED     // 启动加热床的热保护
+#define THERMAL_PROTECTION_CHAMBER // 启动加热室的热保护
 
 //===========================================================================
-//============================= Mechanical Settings =========================
+//====================== Mechanical Settings 机械设置 =======================
 //===========================================================================
 
 // @section machine
 
-// Uncomment one of these options to enable CoreXY, CoreXZ, or CoreYZ kinematics
-// either in the usual order or reversed
+// 取消注释这些选项之一，以通常的顺序启用CoreXY，CoreXZ或CoreYZ运动选项，或反转
 //#define COREXY
 //#define COREXZ
 //#define COREYZ
@@ -604,14 +594,13 @@
 //#define COREZY
 
 //===========================================================================
-//============================== Endstop Settings ===========================
+//======================= Endstop Settings 归零限位设置 =====================
 //===========================================================================
 
 // @section homing
 
-// Specify here all the endstop connectors that are connected to any endstop or probe.
-// Almost all printers will be using one per axis. Probes will use one or more of the
-// extra connectors. Leave undefined any used for non-endstop and non-probe purposes.
+// 在这里指定所有连接到任何端停止或探针的端停止连接器。几乎所有的打印机都将使用一个轴。
+// 探测将使用一个或多个额外的连接器。保留未定义的任何用于非终止和非探测的用途。
 #define USE_XMIN_PLUG
 #define USE_YMIN_PLUG
 #define USE_ZMIN_PLUG
@@ -619,10 +608,10 @@
 //#define USE_YMAX_PLUG
 //#define USE_ZMAX_PLUG
 
-// Enable pullup for all endstops to prevent a floating state
+// 对所有端点启用上拉，以防止出现浮动状态
 #define ENDSTOPPULLUPS
 #if DISABLED(ENDSTOPPULLUPS)
-  // Disable ENDSTOPPULLUPS to set pullups individually
+  // 禁用ENDSTOPPULLUPS以分别设置上拉
   //#define ENDSTOPPULLUP_XMAX
   //#define ENDSTOPPULLUP_YMAX
   //#define ENDSTOPPULLUP_ZMAX
@@ -632,10 +621,10 @@
   //#define ENDSTOPPULLUP_ZMIN_PROBE
 #endif
 
-// Enable pulldown for all endstops to prevent a floating state
+// 对所有端点启用下拉，以防止出现浮动状态
 //#define ENDSTOPPULLDOWNS
 #if DISABLED(ENDSTOPPULLDOWNS)
-  // Disable ENDSTOPPULLDOWNS to set pulldowns individually
+  // 禁用ENDSTOPPULLDOWNS可分别设置下拉菜单
   //#define ENDSTOPPULLDOWN_XMAX
   //#define ENDSTOPPULLDOWN_YMAX
   //#define ENDSTOPPULLDOWN_ZMAX
@@ -645,24 +634,24 @@
   //#define ENDSTOPPULLDOWN_ZMIN_PROBE
 #endif
 
-// Mechanical endstop with COM to ground and NC to Signal uses "false" here (most common setup).
-#define X_MIN_ENDSTOP_INVERTING false // Set to true to invert the logic of the endstop.
-#define Y_MIN_ENDSTOP_INVERTING false // Set to true to invert the logic of the endstop.
-#define Z_MIN_ENDSTOP_INVERTING false // Set to true to invert the logic of the endstop.
-#define X_MAX_ENDSTOP_INVERTING false // Set to true to invert the logic of the endstop.
-#define Y_MAX_ENDSTOP_INVERTING false // Set to true to invert the logic of the endstop.
-#define Z_MAX_ENDSTOP_INVERTING false // Set to true to invert the logic of the endstop.
-#define Z_MIN_PROBE_ENDSTOP_INVERTING false // Set to true to invert the logic of the probe.
+// 机械端挡块，COM接地，NC接信号，此处使用“ false”（最常见的设置）。
+#define X_MIN_ENDSTOP_INVERTING false       // 设置为true以反转结束停止的逻辑。
+#define Y_MIN_ENDSTOP_INVERTING false       // 设置为true以反转结束停止的逻辑。
+#define Z_MIN_ENDSTOP_INVERTING false       // 设置为true以反转结束停止的逻辑。
+#define X_MAX_ENDSTOP_INVERTING false       // 设置为true以反转结束停止的逻辑。
+#define Y_MAX_ENDSTOP_INVERTING false       // 设置为true以反转结束停止的逻辑。
+#define Z_MAX_ENDSTOP_INVERTING false       // 设置为true以反转结束停止的逻辑。
+#define Z_MIN_PROBE_ENDSTOP_INVERTING false // 设置为true以反转探测的逻辑。
 
 /**
- * Stepper Drivers
+ * 步进驱动
  *
- * These settings allow Marlin to tune stepper driver timing and enable advanced options for
- * stepper drivers that support them. You may also override timing options in Configuration_adv.h.
+ * 这些设置允许Marlin调优步进驱动程序定时，并为支持它们的步进驱动程序启用高级选项。
+ * 您还可以在Configuration_adv.h中重写计时选项。
  *
- * A4988 is assumed for unspecified drivers.
+ * 默认使用A4988用于未指定的驱动程序。
  *
- * Options: A4988, A5984, DRV8825, LV8729, L6470, L6474, POWERSTEP01,
+ * 选项: A4988, A5984, DRV8825, LV8729, L6470, L6474, POWERSTEP01,
  *          TB6560, TB6600, TMC2100,
  *          TMC2130, TMC2130_STANDALONE, TMC2160, TMC2160_STANDALONE,
  *          TMC2208, TMC2208_STANDALONE, TMC2209, TMC2209_STANDALONE,
@@ -670,31 +659,30 @@
  *          TMC5130, TMC5130_STANDALONE, TMC5160, TMC5160_STANDALONE
  * :['A4988', 'A5984', 'DRV8825', 'LV8729', 'L6470', 'L6474', 'POWERSTEP01', 'TB6560', 'TB6600', 'TMC2100', 'TMC2130', 'TMC2130_STANDALONE', 'TMC2160', 'TMC2160_STANDALONE', 'TMC2208', 'TMC2208_STANDALONE', 'TMC2209', 'TMC2209_STANDALONE', 'TMC26X', 'TMC26X_STANDALONE', 'TMC2660', 'TMC2660_STANDALONE', 'TMC5130', 'TMC5130_STANDALONE', 'TMC5160', 'TMC5160_STANDALONE']
  */
-//#define X_DRIVER_TYPE  A4988
-//#define Y_DRIVER_TYPE  A4988
-//#define Z_DRIVER_TYPE  A4988
-//#define X2_DRIVER_TYPE A4988
-//#define Y2_DRIVER_TYPE A4988
-//#define Z2_DRIVER_TYPE A4988
-//#define Z3_DRIVER_TYPE A4988
-//#define Z4_DRIVER_TYPE A4988
-//#define E0_DRIVER_TYPE A4988
-//#define E1_DRIVER_TYPE A4988
-//#define E2_DRIVER_TYPE A4988
-//#define E3_DRIVER_TYPE A4988
-//#define E4_DRIVER_TYPE A4988
-//#define E5_DRIVER_TYPE A4988
-//#define E6_DRIVER_TYPE A4988
-//#define E7_DRIVER_TYPE A4988
+//#define X_DRIVER_TYPE  DRV8825
+//#define Y_DRIVER_TYPE  DRV8825
+//#define Z_DRIVER_TYPE  DRV8825
+//#define X2_DRIVER_TYPE DRV8825
+//#define Y2_DRIVER_TYPE DRV8825
+//#define Z2_DRIVER_TYPE DRV8825
+//#define Z3_DRIVER_TYPE DRV8825
+//#define Z4_DRIVER_TYPE DRV8825
+//#define E0_DRIVER_TYPE DRV8825
+//#define E1_DRIVER_TYPE DRV8825
+//#define E2_DRIVER_TYPE DRV8825
+//#define E3_DRIVER_TYPE DRV8825
+//#define E4_DRIVER_TYPE DRV8825
+//#define E5_DRIVER_TYPE DRV8825
+//#define E6_DRIVER_TYPE DRV8825
+//#define E7_DRIVER_TYPE DRV8825
 
-// Enable this feature if all enabled endstop pins are interrupt-capable.
-// This will remove the need to poll the interrupt pins, saving many CPU cycles.
+// 如果所有已启用的终端引脚都支持中断，则启用此功能。这将消除轮询中断插脚的需要，节省许多CPU周期。
 //#define ENDSTOP_INTERRUPTS_FEATURE
 
 /**
- * Endstop Noise Threshold
+ * 归零噪声阈值
  *
- * Enable if your probe or endstops falsely trigger due to noise.
+ * 如果您的探针或端止点由于噪声而错误触发，请启用。
  *
  * - Higher values may affect repeatability or accuracy of some bed probes.
  * - To fix noise install a 100nF ceramic capacitor inline with the switch.
@@ -706,35 +694,34 @@
 //#define ENDSTOP_NOISE_THRESHOLD 2
 
 //=============================================================================
-//============================== Movement Settings ============================
+//===================== Movement Settings 运动设置 ============================
 //=============================================================================
 // @section motion
 
 /**
- * Default Settings
+ * 默认设置
  *
- * These settings can be reset by M502
+ * 这些设置可以用M502复位
  *
- * Note that if EEPROM is enabled, saved values will override these.
+ * 注意，如果启用了EEPROM，保存的值将覆盖这些值。
  */
 
 /**
- * With this option each E stepper can have its own factors for the
- * following movement settings. If fewer factors are given than the
- * total number of extruders, the last value applies to the rest.
+ * 有了这个选项，每个E步进器可以有自己的因素，为以下的运动设置。
+ * 如果给定的因子比挤出机的总数少，则最后一个值适用于其余的因子。
  */
 //#define DISTINCT_E_FACTORS
 
 /**
- * Default Axis Steps Per Unit (steps/mm)
- * Override with M92
+ * 默认单位轴步长(步长/毫米)
+ * 可使用 M92 覆盖
  *                                      X, Y, Z, E0 [, E1[, E2...]]
  */
 #define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 4000, 500 }
 
 /**
- * Default Max Feed Rate (mm/s)
- * Override with M203
+ * 默认最大进给速率(mm/s)
+ * 可使用 M203 覆盖
  *                                      X, Y, Z, E0 [, E1[, E2...]]
  */
 #define DEFAULT_MAX_FEEDRATE          { 300, 300, 5, 25 }
@@ -745,9 +732,9 @@
 #endif
 
 /**
- * Default Max Acceleration (change/s) change = mm/s
- * (Maximum start speed for accelerated moves)
- * Override with M201
+ * 默认最大加速度(更改/秒)更改= mm/s
+ * (加速动作的最大开始速度)
+ * 可使用 M201 覆盖
  *                                      X, Y, Z, E0 [, E1[, E2...]]
  */
 #define DEFAULT_MAX_ACCELERATION      { 3000, 3000, 100, 10000 }
@@ -757,9 +744,9 @@
   #define MAX_ACCEL_EDIT_VALUES       { 6000, 6000, 200, 20000 } // ...or, set your own edit limits
 #endif
 
-/**
- * Default Acceleration (change/s) change = mm/s
- * Override with M204
+/** 
+ * 默认加速(更改/秒)更改= mm/s
+ * 可使用 M204 覆盖
  *
  *   M204 P    Acceleration
  *   M204 R    Retract Acceleration
@@ -770,12 +757,11 @@
 #define DEFAULT_TRAVEL_ACCELERATION   3000    // X, Y, Z acceleration for travel (non printing) moves
 
 /**
- * Default Jerk limits (mm/s)
- * Override with M205 X Y Z E
+ * 默认 Jerk 范围 (mm/s)
+ * 可使用 M205 覆盖 X Y Z E
  *
- * "Jerk" specifies the minimum speed change that requires acceleration.
- * When changing speed and direction, if the difference is less than the
- * value set here, it may happen instantaneously.
+ * “Jerk”指定需要加速的最小速度变化。
+ * 当改变速度和方向时，如果差值小于此处设置的值，则可能瞬间发生。
  */
 //#define CLASSIC_JERK
 #if ENABLED(CLASSIC_JERK)
@@ -796,7 +782,7 @@
 /**
  * Junction Deviation Factor
  *
- * See:
+ * 查看:
  *   https://reprap.org/forum/read.php?1,739819
  *   http://blog.kyneticcnc.com/2018/10/computing-junction-deviation-for-marlin.html
  */
@@ -805,84 +791,79 @@
 #endif
 
 /**
- * S-Curve Acceleration
+ * S加减速
  *
- * This option eliminates vibration during printing by fitting a Bézier
- * curve to move acceleration, producing much smoother direction changes.
+ * 此选项通过拟合Bezie曲线来加速移动，从而消除打印过程中的振动，产生更平滑的方向变化。
  *
- * See https://github.com/synthetos/TinyG/wiki/Jerk-Controlled-Motion-Explained
+ * 查看 https://github.com/synthetos/TinyG/wiki/Jerk-Controlled-Motion-Explained
  */
 //#define S_CURVE_ACCELERATION
 
 //===========================================================================
-//============================= Z Probe Options =============================
+//======================== Z Probe Options Z探头设置 ========================
 //===========================================================================
 // @section probes
 
 //
-// See http://marlinfw.org/docs/configuration/probes.html
+// 查看 http://marlinfw.org/docs/configuration/probes.html
 //
 
 /**
  * Z_MIN_PROBE_USES_Z_MIN_ENDSTOP_PIN
  *
- * Enable this option for a probe connected to the Z Min endstop pin.
+ * 为连接到Z Min端停止引脚的探针启用此选项。
  */
 #define Z_MIN_PROBE_USES_Z_MIN_ENDSTOP_PIN
 
 /**
  * Z_MIN_PROBE_PIN
  *
- * Define this pin if the probe is not connected to Z_MIN_PIN.
- * If not defined the default pin for the selected MOTHERBOARD
- * will be used. Most of the time the default is what you want.
+* 如果探针没有连接到Z_MIN_PIN，则定义此pin。如果没有定义，将使用所选主板的默认引脚。大多数情况下，默认值就可以了。
  *
- *  - The simplest option is to use a free endstop connector.
- *  - Use 5V for powered (usually inductive) sensors.
+ *  - 最简单的选择是使用一个免费的终端连接器。
+ *  - 使用5V电源(通常是感应式)传感器。
  *
- *  - RAMPS 1.3/1.4 boards may use the 5V, GND, and Aux4->D32 pin:
- *    - For simple switches connect...
- *      - normally-closed switches to GND and D32.
- *      - normally-open switches to 5V and D32.
+ *  - RAMPS 1.3/1.4 板使用5V, GND, 和 Aux4->D32 pin:
+ *    - 对于简单开关连接...
+ *      - 常闭开关 GND 和 D32.
+ *      - 常开开关 5V 和 D32.
  *
  */
-//#define Z_MIN_PROBE_PIN 32 // Pin 32 is the RAMPS default
+//#define Z_MIN_PROBE_PIN 32 // Pin 32 是 RAMPS 的默认值
 
 /**
- * Probe Type
+ * 探头类型
  *
- * Allen Key Probes, Servo Probes, Z-Sled Probes, FIX_MOUNTED_PROBE, etc.
- * Activate one of these to use Auto Bed Leveling below.
+ * 六角键探头、伺服探头、z型滑车探头、固定式探头等。
+ * 激活其中之一，以使用下面的自动调平床。
  */
 
 /**
- * The "Manual Probe" provides a means to do "Auto" Bed Leveling without a probe.
- * Use G29 repeatedly, adjusting the Z height at each point with movement commands
- * or (with LCD_BED_LEVELING) the LCD controller.
+ * “手动探头”提供了一种方法来做自动“床找平没有探针。
+ * 重复使用G29，使用移动命令或LCD控制器(使用lcd_bed_level)调整每个点Z的高度。
  */
 //#define PROBE_MANUALLY
 //#define MANUAL_PROBE_START_Z 0.2
 
 /**
- * A Fix-Mounted Probe either doesn't deploy or needs manual deployment.
- *   (e.g., an inductive probe or a nozzle-based probe-switch.)
+ * 固定安装的探测要么不部署，要么需要手动部署。
+ * (例如，感应探头或基于喷嘴的探针开关。)
  */
 //#define FIX_MOUNTED_PROBE
 
 /**
- * Use the nozzle as the probe, as with a conductive
- * nozzle system or a piezo-electric smart effector.
+ * 使用喷嘴作为探头，如与导电喷嘴系统或压电智能执行器。
  */
 //#define NOZZLE_AS_PROBE
 
 /**
- * Z Servo Probe, such as an endstop switch on a rotating arm.
+ * Z伺服探头，如旋转臂上的止动开关。
  */
-//#define Z_PROBE_SERVO_NR 0       // Defaults to SERVO 0 connector.
-//#define Z_SERVO_ANGLES { 70, 0 } // Z Servo Deploy and Stow angles
+//#define Z_PROBE_SERVO_NR 0       // 默认伺服0接头。
+//#define Z_SERVO_ANGLES { 70, 0 } // Z伺服电机展开角度和收起角度
 
 /**
- * The BLTouch probe uses a Hall effect sensor and emulates a servo.
+ * BLTouch探头使用霍尔效应传感器并模拟伺服。
  */
 //#define BLTOUCH
 
@@ -898,171 +879,163 @@
  */
 //#define TOUCH_MI_PROBE
 #if ENABLED(TOUCH_MI_PROBE)
-  #define TOUCH_MI_RETRACT_Z 0.5                  // Height at which the probe retracts
-  //#define TOUCH_MI_DEPLOY_XPOS (X_MAX_BED + 2)  // For a magnet on the right side of the bed
-  //#define TOUCH_MI_MANUAL_DEPLOY                // For manual deploy (LCD menu)
+  #define TOUCH_MI_RETRACT_Z 0.5                  // 探针缩回的高度
+  //#define TOUCH_MI_DEPLOY_XPOS (X_MAX_BED + 2)  // 对于床右侧的磁铁
+  //#define TOUCH_MI_MANUAL_DEPLOY                // 用于手动部署（LCD菜单）
 #endif
 
-// A probe that is deployed and stowed with a solenoid pin (SOL1_PIN)
+// 部署并存放有电磁销（SOL1_PIN）的探针
 //#define SOLENOID_PROBE
 
-// A sled-mounted probe like those designed by Charles Bell.
+// 类似于Charles Bell设计的安装在雪橇上的探头。
 //#define Z_PROBE_SLED
-//#define SLED_DOCKING_OFFSET 5  // The extra distance the X axis must travel to pickup the sled. 0 should be fine but you can push it further if you'd like.
+//#define SLED_DOCKING_OFFSET 5  // X轴必须经过额外的距离才能提起雪橇。0应该可以，但如果您愿意，可以再往前推。
 
-// A probe deployed by moving the x-axis, such as the Wilson II's rack-and-pinion probe designed by Marty Rice.
+//一种通过移动x轴展开的探针，如由马蒂·赖斯设计的威尔逊二世齿条-齿轮式探针。
 //#define RACK_AND_PINION_PROBE
 #if ENABLED(RACK_AND_PINION_PROBE)
   #define Z_PROBE_DEPLOY_X  X_MIN_POS
   #define Z_PROBE_RETRACT_X X_MAX_POS
 #endif
 
-// Duet Smart Effector (for delta printers) - https://bit.ly/2ul5U7J
-// When the pin is defined you can use M672 to set/reset the probe sensivity.
+// Duet智能执行器(适用于delta打印机) - https://bit.ly/2ul5U7J
+// 当pin被定义时，您可以使用M672来设置/重置探针灵敏度。
 //#define DUET_SMART_EFFECTOR
 #if ENABLED(DUET_SMART_EFFECTOR)
-  #define SMART_EFFECTOR_MOD_PIN  -1  // Connect a GPIO pin to the Smart Effector MOD pin
+  #define SMART_EFFECTOR_MOD_PIN  -1  // 连接一个GPIO引脚到智能执行器MOD引脚
 #endif
 
 /**
- * Use StallGuard2 to probe the bed with the nozzle.
- * Requires stallGuard-capable Trinamic stepper drivers.
- * CAUTION: This can damage machines with Z lead screws.
- *          Take extreme care when setting up this feature.
+ * 用喷嘴探测床的内部。
+ * 需要有史泰龙能力的三级步进驱动。
+ * 注意:这可能会损坏带Z型丝杠的机器。
+ * 在设置此功能时要格外小心。
  */
 //#define SENSORLESS_PROBING
 
 //
-// For Z_PROBE_ALLEN_KEY see the Delta example configurations.
+// 有关Z_PROBE_ALLEN_KEY，请参见增量配置示例。
 //
 
 /**
- * Z Probe to nozzle (X,Y) offset, relative to (0, 0).
+ * Z探头到喷嘴(X,Y)的偏移量，相对于(0,0)。
  *
- * In the following example the X and Y offsets are both positive:
+ * 在下面的例子中，X和Y的偏移量都是正的:
  *
  *   #define NOZZLE_TO_PROBE_OFFSET { 10, 10, 0 }
  *
- *     +-- BACK ---+
- *     |           |
- *   L |    (+) P  | R <-- probe (20,20)
- *   E |           | I
- *   F | (-) N (+) | G <-- nozzle (10,10)
- *   T |           | H
- *     |    (-)    | T
- *     |           |
- *     O-- FRONT --+
- *   (0,0)
+ *      +-- 后面 ---+
+ *      |           |
+ *      |    (+) P  |       P <-- 探针 (20,20)
+ *   左 |           | 右
+ *   右 | (-) N (+) | 边    N <-- 喷嘴 (10,10)
+ *      |           | 
+ *      |    (-)    | 
+ *      |           |
+ *      O-- 前面  --+
+ *    (0,0)
  *
- * Specify a Probe position as { X, Y, Z }
+ * 指定探测位置为 { X, Y, Z }
  */
 #define NOZZLE_TO_PROBE_OFFSET { 10, 10, 0 }
 
-// Most probes should stay away from the edges of the bed, but
-// with NOZZLE_AS_PROBE this can be negative for a wider probing area.
+// 大多数探测应该远离床的边缘，但是使用NOZZLE_AS_PROBE可以使探测范围更广。
 #define MIN_PROBE_EDGE 10
 
-// X and Y axis travel speed (mm/m) between probes
+// X轴和Y轴在探头之间的移动速度(mm/m)
 #define XY_PROBE_SPEED 8000
 
-// Feedrate (mm/m) for the first approach when double-probing (MULTIPLE_PROBING == 2)
+// 双探测时第一进路进给速率(mm/m)(MULTIPLE_PROBING == 2)
 #define Z_PROBE_SPEED_FAST HOMING_FEEDRATE_Z
 
-// Feedrate (mm/m) for the "accurate" probe of each point
+// 进料速率(mm/m)，以保证每个点的“精确”探头
 #define Z_PROBE_SPEED_SLOW (Z_PROBE_SPEED_FAST / 2)
 
 /**
- * Multiple Probing
+ * 多探针
  *
- * You may get improved results by probing 2 or more times.
- * With EXTRA_PROBING the more atypical reading(s) will be disregarded.
- *
- * A total of 2 does fast/slow probes with a weighted average.
- * A total of 3 or more adds more slow probes, taking the average.
+ * 你可以通过探测2次或更多次得到更好的结果。通过外向探究，那些非典型性的阅读将被忽略。
+ * 总共有2个采用加权平均值的快/慢探针。
+ * 总共有3个或更多的探测会增加更慢的探测，取平均值。
  */
 //#define MULTIPLE_PROBING 2
 //#define EXTRA_PROBING    1
 
 /**
- * Z probes require clearance when deploying, stowing, and moving between
- * probe points to avoid hitting the bed and other hardware.
- * Servo-mounted probes require extra space for the arm to rotate.
- * Inductive probes need space to keep from triggering early.
+ * Z型探头在部署、装载和在探头点之间移动时需要清除间隙，以避免碰到床和其他硬件。
+ * 伺服安装的探头需要额外的空间让手臂旋转。
+ * 感应探针需要空间来防止早期触发。
  *
- * Use these settings to specify the distance (mm) to raise the probe (or
- * lower the bed). The values set here apply over and above any (negative)
- * probe Z Offset set with NOZZLE_TO_PROBE_OFFSET, M851, or the LCD.
- * Only integer values >= 1 are valid here.
+ * 使用这些设置指定距离(mm)来升高探头(或降低床层)。
+ * 这里设置的值适用于任意(负)以上的值用NOZZLE_TO_PROBE_OFFSET、M851或LCD探测Z偏移量集。
+ * 这里只有整数值>= 1有效。
  *
- * Example: `M851 Z-5` with a CLEARANCE of 4  =>  9mm from bed to nozzle.
- *     But: `M851 Z+1` with a CLEARANCE of 2  =>  2mm from bed to nozzle.
+ * 例如: `M851 Z-5` with a CLEARANCE of 4  =>  9mm from bed to nozzle.
+ * 但是: `M851 Z+1` with a CLEARANCE of 2  =>  2mm from bed to nozzle.
  */
-#define Z_CLEARANCE_DEPLOY_PROBE   10 // Z Clearance for Deploy/Stow
-#define Z_CLEARANCE_BETWEEN_PROBES  5 // Z Clearance between probe points
-#define Z_CLEARANCE_MULTI_PROBE     5 // Z Clearance between multiple probes
-//#define Z_AFTER_PROBING           5 // Z position after probing is done
+#define Z_CLEARANCE_DEPLOY_PROBE   10 // 部署/装载的Z许可
+#define Z_CLEARANCE_BETWEEN_PROBES  5 // 探测点之间的Z间隙
+#define Z_CLEARANCE_MULTI_PROBE     5 // 多个探针之间的Z间隙
+//#define Z_AFTER_PROBING           5 // Z位置探测完成后
 
-#define Z_PROBE_LOW_POINT          -2 // Farthest distance below the trigger-point to go before stopping
-
-// For M851 give a range for adjusting the Z probe offset
+#define Z_PROBE_LOW_POINT          -2 // 在扳机点以下最远处停下来
+// 对于M851，给出调整Z探头偏移的范围
 #define Z_PROBE_OFFSET_RANGE_MIN -20
 #define Z_PROBE_OFFSET_RANGE_MAX 20
 
-// Enable the M48 repeatability test to test probe accuracy
+// 启用M48重复性测试来测试探针的准确性
 //#define Z_MIN_PROBE_REPEATABILITY_TEST
 
-// Before deploy/stow pause for user confirmation
+// 在部署/装载之前暂停以进行用户确认
 //#define PAUSE_BEFORE_DEPLOY_STOW
 #if ENABLED(PAUSE_BEFORE_DEPLOY_STOW)
-  //#define PAUSE_PROBE_DEPLOY_WHEN_TRIGGERED // For Manual Deploy Allenkey Probe
+  //#define PAUSE_PROBE_DEPLOY_WHEN_TRIGGERED // 用于手动部署Allenkey探测
 #endif
 
 /**
- * Enable one or more of the following if probing seems unreliable.
- * Heaters and/or fans can be disabled during probing to minimize electrical
- * noise. A delay can also be added to allow noise and vibration to settle.
- * These options are most useful for the BLTouch probe, but may also improve
- * readings with inductive probes and piezo sensors.
+ * 如果探测看起来不可靠，启用以下一个或多个选项。
+ * 在探测过程中，可以关闭加热器和/或风扇，以减少电子噪音。延迟也可以添加，以允许噪音和振动的解决。
+ * 这些选项对BLTouch探测器最有用，但也可能提高感应探头和压电传感器的读数。
  */
-//#define PROBING_HEATERS_OFF       // Turn heaters off when probing
+//#define PROBING_HEATERS_OFF       // 探测时关闭加热器
 #if ENABLED(PROBING_HEATERS_OFF)
-  //#define WAIT_FOR_BED_HEATER     // Wait for bed to heat back up between probes (to improve accuracy)
+  //#define WAIT_FOR_BED_HEATER     // 等待床在探针之间加热(以提高准确性)
 #endif
-//#define PROBING_FANS_OFF          // Turn fans off when probing
-//#define PROBING_STEPPERS_OFF      // Turn steppers off (unless needed to hold position) when probing
-//#define DELAY_BEFORE_PROBING 200  // (ms) To prevent vibrations from triggering piezo sensors
+//#define PROBING_FANS_OFF          // 在探测时关闭风扇
+//#define PROBING_STEPPERS_OFF      // 在探测时关闭步进器(除非需要保持位置)
+//#define DELAY_BEFORE_PROBING 200  // (ms)防止振动触发压电传感器
 
-// For Inverting Stepper Enable Pins (Active Low) use 0, Non Inverting (Active High) use 1
+// 对于反相步进器使能引脚(有源低引脚)使用0，非反相(有源高引脚)请使用数值 1
 // :{ 0:'Low', 1:'High' }
 #define X_ENABLE_ON 0
 #define Y_ENABLE_ON 0
 #define Z_ENABLE_ON 0
 #define E_ENABLE_ON 0 // For all extruders
 
-// Disables axis stepper immediately when it's not being used.
-// WARNING: When motors turn off there is a chance of losing position accuracy!
+// 不使用时立即禁用轴步进器。
+// 警告:当电机关闭时，有可能失去位置精度!
 #define DISABLE_X false
 #define DISABLE_Y false
 #define DISABLE_Z false
 
-// Warn on display about possibly reduced accuracy
+// 警告显示可能降低精度
 //#define DISABLE_REDUCED_ACCURACY_WARNING
 
 // @section extruder
 
-#define DISABLE_E false             // For all extruders
-#define DISABLE_INACTIVE_EXTRUDER   // Keep only the active extruder enabled
+#define DISABLE_E false             // 对于所有的挤出机
+#define DISABLE_INACTIVE_EXTRUDER   // 只启用活动挤出器
 
 // @section machine
 
-// Invert the stepper direction. Change (or reverse the motor connector) if an axis goes the wrong way.
+// 反转伺服步进方电机方向。如果轴向错误，则更改(或反转电机连接器)。
 #define INVERT_X_DIR false
 #define INVERT_Y_DIR true
 #define INVERT_Z_DIR false
 
 // @section extruder
 
-// For direct drive extruder v9 set to true, for geared extruder set to false.
+// 对于直接驱动挤出机v9设置为真，对于齿轮驱动挤出机设置为假。
 #define INVERT_E0_DIR false
 #define INVERT_E1_DIR false
 #define INVERT_E2_DIR false
@@ -1074,16 +1047,16 @@
 
 // @section homing
 
-//#define NO_MOTION_BEFORE_HOMING // Inhibit movement until all axes have been homed
+//#define NO_MOTION_BEFORE_HOMING // 禁止运动，直到所有轴归位
 
-//#define UNKNOWN_Z_NO_RAISE      // Don't raise Z (lower the bed) if Z is "unknown." For beds that fall when Z is powered off.
+//#define UNKNOWN_Z_NO_RAISE      // 如果Z为“未知”，请勿升高Z（放下床）。 对于Z断电时掉落的床。
 
-//#define Z_HOMING_HEIGHT  4      // (mm) Minimal Z height before homing (G28) for Z clearance above the bed, clamps, ...
-                                  // Be sure to have this much clearance over your Z_MAX_POS to prevent grinding.
+//#define Z_HOMING_HEIGHT  4      //（mm）归零之前的最小Z高度（G28），以便在床，夹具 ...
+                                  // 确保在您的Z_MAX_POS上有这么大的间隙，以防止磨削。
 
-//#define Z_AFTER_HOMING  10      // (mm) Height to move to after homing Z
+//#define Z_AFTER_HOMING  10      //（mm）归零后要移动到的高度
 
-// Direction of endstops when homing; 1=MAX, -1=MIN
+// 归位时的挡块方向； 1 =最大，-1 =最小
 // :[-1,1]
 #define X_HOME_DIR -1
 #define Y_HOME_DIR -1
@@ -1091,11 +1064,11 @@
 
 // @section machine
 
-// The size of the print bed
+// 打印台的尺寸
 #define X_BED_SIZE 200
 #define Y_BED_SIZE 200
 
-// Travel limits (mm) after homing, corresponding to endstop positions.
+// 归位后的行程极限（毫米），对应于挡块位置。
 #define X_MIN_POS 0
 #define Y_MIN_POS 0
 #define Z_MIN_POS 0
@@ -1106,13 +1079,13 @@
 /**
  * Software Endstops
  *
- * - Prevent moves outside the set machine bounds.
- * - Individual axes can be disabled, if desired.
- * - X and Y only apply to Cartesian robots.
- * - Use 'M211' to set software endstops on/off or report current state
+ * - 防止移动超出设定的机器范围。
+ * - 如果需要，可以禁用单个轴。
+ * - X和Y仅适用于笛卡尔坐标是机器。
+ * - 使用“ M211”设置软件停止器的开/关或报告当前状态
  */
 
-// Min software endstops constrain movement within minimum coordinate bounds
+// 最小软件终端限制在最小坐标范围内的运动
 #define MIN_SOFTWARE_ENDSTOPS
 #if ENABLED(MIN_SOFTWARE_ENDSTOPS)
   #define MIN_SOFTWARE_ENDSTOP_X
@@ -1120,7 +1093,7 @@
   #define MIN_SOFTWARE_ENDSTOP_Z
 #endif
 
-// Max software endstops constrain movement within maximum coordinate bounds
+// 最大软件终端限制在最大坐标范围内的运动
 #define MAX_SOFTWARE_ENDSTOPS
 #if ENABLED(MAX_SOFTWARE_ENDSTOPS)
   #define MAX_SOFTWARE_ENDSTOP_X
@@ -1129,49 +1102,46 @@
 #endif
 
 #if EITHER(MIN_SOFTWARE_ENDSTOPS, MAX_SOFTWARE_ENDSTOPS)
-  //#define SOFT_ENDSTOPS_MENU_ITEM  // Enable/Disable software endstops from the LCD
+  //#define SOFT_ENDSTOPS_MENU_ITEM  // 在LCD上启用/禁用软件终端
 #endif
 
 /**
- * Filament Runout Sensors
- * Mechanical or opto endstops are used to check for the presence of filament.
+ * 进料传感器
+ * 机械或opto端挡用于检查灯丝是否存在。
  *
- * RAMPS-based boards use SERVO3_PIN for the first runout sensor.
- * For other boards you may need to define FIL_RUNOUT_PIN, FIL_RUNOUT2_PIN, etc.
- * By default the firmware assumes HIGH=FILAMENT PRESENT.
+ * 基于RAMPS的板将SERVO3_PIN用于第一个跳动传感器。
+ * 对于其他板，您可能需要定义FIL_RUNOUT_PIN，FIL_RUNOUT2_PIN等。
+ * 默认情况下，假定HIGH = FILAMENT PRESENT。
  */
 //#define FILAMENT_RUNOUT_SENSOR
 #if ENABLED(FILAMENT_RUNOUT_SENSOR)
-  #define NUM_RUNOUT_SENSORS   1     // Number of sensors, up to one per extruder. Define a FIL_RUNOUT#_PIN for each.
-  #define FIL_RUNOUT_INVERTING false // Set to true to invert the logic of the sensor.
-  #define FIL_RUNOUT_PULLUP          // Use internal pullup for filament runout pins.
-  //#define FIL_RUNOUT_PULLDOWN      // Use internal pulldown for filament runout pins.
+  #define NUM_RUNOUT_SENSORS   1     // 传感器数量，每个挤出机最多一个。 为每个定义一个FIL_RUNOUT＃_PIN。
+  #define FIL_RUNOUT_INVERTING false // 设置为true可反转传感器的逻辑。
+  #define FIL_RUNOUT_PULLUP          // 对进料传感器使用内部上拉。
+  //#define FIL_RUNOUT_PULLDOWN      // 对进料传感器使用内部下拉。
 
-  // Set one or more commands to execute on filament runout.
-  // (After 'M412 H' Marlin will ask the host to handle the process.)
+  // 设置一个或多个命令以在进料传感器执行。
+  // （在“ M412 H”之后，Marlin将要求host处理该过程。）
   #define FILAMENT_RUNOUT_SCRIPT "M600"
 
-  // After a runout is detected, continue printing this length of filament
-  // before executing the runout script. Useful for a sensor at the end of
-  // a feed tube. Requires 4 bytes SRAM per sensor, plus 4 bytes overhead.
+  // 检测到断料后，请在执行断料脚本之前继续打印此长度的灯丝。 
+  // 用于进料管末端的传感器。每个传感器需要4字节SRAM，外加4字节开销。
   //#define FILAMENT_RUNOUT_DISTANCE_MM 25
 
   #ifdef FILAMENT_RUNOUT_DISTANCE_MM
-    // Enable this option to use an encoder disc that toggles the runout pin
-    // as the filament moves. (Be sure to set FILAMENT_RUNOUT_DISTANCE_MM
-    // large enough to avoid false positives.)
+    // 启用此选项可使用编码器光盘，该光盘可在灯丝移动时切换跳动销。 
+	//（请确保将FILAMENT_RUNOUT_DISTANCE_MM设置为足够大，以避免误报。）
     //#define FILAMENT_MOTION_SENSOR
   #endif
 #endif
 
 //===========================================================================
-//=============================== Bed Leveling ==============================
+//========================= Bed Leveling 平台调平 ===========================
 //===========================================================================
 // @section calibrate
 
 /**
- * Choose one of the options below to enable G29 Bed Leveling. The parameters
- * and behavior of G29 will change depending on your selection.
+ * 选择以下选项之一，以启用G29床找平。的参数G29的行为会根据你的选择而改变。
  *
  *  If using a Probe for Z Homing, enable Z_SAFE_HOMING also!
  *
@@ -1281,17 +1251,17 @@
   //========================= Unified Bed Leveling ============================
   //===========================================================================
 
-  //#define MESH_EDIT_GFX_OVERLAY   // Display a graphics overlay while editing the mesh
+  //#define MESH_EDIT_GFX_OVERLAY   // 显示一个图形覆盖而编辑网格
 
-  #define MESH_INSET 1              // Set Mesh bounds as an inset region of the bed
-  #define GRID_MAX_POINTS_X 10      // Don't use more than 15 points per axis, implementation limited.
+  #define MESH_INSET 1              // 将网格边界设置为床的嵌入区域
+  #define GRID_MAX_POINTS_X 10      // 每个轴使用不超过15点，实现有限。
   #define GRID_MAX_POINTS_Y GRID_MAX_POINTS_X
 
-  #define UBL_MESH_EDIT_MOVES_Z     // Sophisticated users prefer no movement of nozzle
-  #define UBL_SAVE_ACTIVE_ON_M500   // Save the currently active mesh in the current slot on M500
+  #define UBL_MESH_EDIT_MOVES_Z     // 经验丰富的用户不喜欢移动喷嘴
+  #define UBL_SAVE_ACTIVE_ON_M500   // 将当前活动网格保存在M500上的当前槽中
 
-  //#define UBL_Z_RAISE_WHEN_OFF_MESH 2.5 // When the nozzle is off the mesh, this value is used
-                                          // as the Z-Height correction value.
+  //#define UBL_Z_RAISE_WHEN_OFF_MESH 2.5 // 当喷嘴离开网格时，这个值被用作Z-Height校正值。
+                                          
 
 #elif ENABLED(MESH_BED_LEVELING)
 
@@ -1299,98 +1269,98 @@
   //=================================== Mesh ==================================
   //===========================================================================
 
-  #define MESH_INSET 10          // Set Mesh bounds as an inset region of the bed
-  #define GRID_MAX_POINTS_X 3    // Don't use more than 7 points per axis, implementation limited.
+  #define MESH_INSET 10          // 将网格边界设置为床的嵌入区域
+  #define GRID_MAX_POINTS_X 3    // 每轴使用不超过7个点，实现受限。
   #define GRID_MAX_POINTS_Y GRID_MAX_POINTS_X
 
-  //#define MESH_G28_REST_ORIGIN // After homing all axes ('G28' or 'G28 XYZ') rest Z at Z_MIN_POS
+  //#define MESH_G28_REST_ORIGIN // 在归位所有轴之后('G28'或'G28 XYZ')在Z_MIN_POS处休息Z
 
 #endif // BED_LEVELING
 
 /**
- * Add a bed leveling sub-menu for ABL or MBL.
- * Include a guided procedure if manual probing is enabled.
+ * 为ABL或MBL添加一个子菜单。
+ * 如果启用手动探测，则包括引导过程。
  */
 //#define LCD_BED_LEVELING
 
 #if ENABLED(LCD_BED_LEVELING)
-  #define MESH_EDIT_Z_STEP  0.025 // (mm) Step size while manually probing Z axis.
-  #define LCD_PROBE_Z_RANGE 4     // (mm) Z Range centered on Z_MIN_POS for LCD Z adjustment
-  //#define MESH_EDIT_MENU        // Add a menu to edit mesh points
+  #define MESH_EDIT_Z_STEP  0.025 // (mm) 手动探测Z轴时的步长。
+  #define LCD_PROBE_Z_RANGE 4     // (mm) Z范围集中在Z_MIN_POS的LCD Z调整
+  //#define MESH_EDIT_MENU        // 添加一个菜单来编辑网格点
 #endif
 
-// Add a menu item to move between bed corners for manual bed adjustment
+// 添加一个菜单项来移动床角之间的手动床调整
 //#define LEVEL_BED_CORNERS
 
 #if ENABLED(LEVEL_BED_CORNERS)
-  #define LEVEL_CORNERS_INSET_LFRB { 30, 30, 30, 30 } // (mm) Left, Front, Right, Back insets
-  #define LEVEL_CORNERS_HEIGHT      0.0   // (mm) Z height of nozzle at leveling points
-  #define LEVEL_CORNERS_Z_HOP       4.0   // (mm) Z height of nozzle between leveling points
-  //#define LEVEL_CENTER_TOO              // Move to the center after the last corner
+  #define LEVEL_CORNERS_INSET_LFRB { 30, 30, 30, 30 } // (mm) 左，前，右，后
+  #define LEVEL_CORNERS_HEIGHT      0.0   // (mm) 喷嘴在水平点的高度Z
+  #define LEVEL_CORNERS_Z_HOP       4.0   // (mm) 水准点之间喷嘴高度Z
+  //#define LEVEL_CENTER_TOO              // 移动到最后一个角落的中心
 #endif
 
 /**
- * Commands to execute at the end of G29 probing.
- * Useful to retract or move the Z probe out of the way.
+ * 在G29探测结束时执行的命令。
+ * 有用的收缩或移动Z探头的方式。
  */
 //#define Z_PROBE_END_SCRIPT "G1 Z10 F12000\nG1 X15 Y330\nG1 Z0.5\nG1 Z10"
 
 
 // @section homing
 
-// The center of the bed is at (X=0, Y=0)
+// 平台的中心在(X=0, Y=0)
 //#define BED_CENTER_AT_0_0
 
-// Manually set the home position. Leave these undefined for automatic settings.
-// For DELTA this is the top-center of the Cartesian print volume.
+// 手动设置回归位置。为自动设置保留这些未定义的值。
+// 对于DELTA，这是笛卡尔打印的顶部中心。
 //#define MANUAL_X_HOME_POS 0
 //#define MANUAL_Y_HOME_POS 0
 //#define MANUAL_Z_HOME_POS 0
 
-// Use "Z Safe Homing" to avoid homing with a Z probe outside the bed area.
+// 使用“ Z安全归位”避免在床区域外使用Z探针归位。
 //
-// With this feature enabled:
+// 启用此功能：
 //
-// - Allow Z homing only after X and Y homing AND stepper drivers still enabled.
-// - If stepper drivers time out, it will need X and Y homing again before Z homing.
-// - Move the Z probe (or nozzle) to a defined XY point before Z Homing when homing all axes (G28).
-// - Prevent Z homing when the Z probe is outside bed area.
+// - 仅在X和Y原点复归且步进驱动器仍启用后才允许Z原点复归。
+// - 如果步进驱动程序超时，则需要在Z原点复归之前再次X和Y原点复归。
+// - 对所有轴进行归位时，将Z探针（或喷嘴）移动到Z归位之前定义的XY点（G28）。
+// - 当Z探头位于床身区域之外时，防止Z归位。
 //
 //#define Z_SAFE_HOMING
 
 #if ENABLED(Z_SAFE_HOMING)
-  #define Z_SAFE_HOMING_X_POINT ((X_BED_SIZE) / 2)    // X point for Z homing when homing all axes (G28).
-  #define Z_SAFE_HOMING_Y_POINT ((Y_BED_SIZE) / 2)    // Y point for Z homing when homing all axes (G28).
+  #define Z_SAFE_HOMING_X_POINT ((X_BED_SIZE) / 2)    // 回原点所有轴（G28）时，Z回原点的Y点。
+  #define Z_SAFE_HOMING_Y_POINT ((Y_BED_SIZE) / 2)    // 回原点所有轴（G28）时，Z回原点的Y点。
 #endif
 
-// Homing speeds (mm/m)
+// 回归速度 (mm/m)
 #define HOMING_FEEDRATE_XY (50*60)
 #define HOMING_FEEDRATE_Z  (4*60)
 
-// Validate that endstops are triggered on homing moves
+// 验证归位移动是否触发了限位器
 #define VALIDATE_HOMING_ENDSTOPS
 
 // @section calibrate
 
 /**
- * Bed Skew Compensation
+ * 床偏补偿
  *
- * This feature corrects for misalignment in the XYZ axes.
+ * 此功能可纠正XYZ轴中的未对准情况。
  *
- * Take the following steps to get the bed skew in the XY plane:
- *  1. Print a test square (e.g., https://www.thingiverse.com/thing:2563185)
- *  2. For XY_DIAG_AC measure the diagonal A to C
- *  3. For XY_DIAG_BD measure the diagonal B to D
- *  4. For XY_SIDE_AD measure the edge A to D
+ * 请执行以下步骤以使床偏斜在XY平面中：
+ *  1. 打印测试方块 (例如： https://www.thingiverse.com/thing:2563185)
+ *  2. 对于XY_DIAG_AC，测量对角线A到C
+ *  3. 对于XY_DIAG_BD，测量对角线B到D
+ *  4. 对于XY_SIDE_AD，测量边A到D
  *
- * Marlin automatically computes skew factors from these measurements.
- * Skew factors may also be computed and set manually:
+ * Marlin会根据这些测量结果自动计算偏斜因子。
+ * 偏斜因子也可以手动计算和设置：
  *
- *  - Compute AB     : SQRT(2*AC*AC+2*BD*BD-4*AD*AD)/2
+ *  - 计算 AB        : SQRT(2*AC*AC+2*BD*BD-4*AD*AD)/2
  *  - XY_SKEW_FACTOR : TAN(PI/2-ACOS((AC*AC-AB*AB-AD*AD)/(2*AB*AD)))
  *
- * If desired, follow the same procedure for XZ and YZ.
- * Use these diagrams for reference:
+ * 如果需要，请对XZ和YZ遵循相同的步骤。
+ * 使用这些图作为参考：
  *
  *    Y                     Z                     Z
  *    ^     B-------C       ^     B-------C       ^     B-------C
@@ -1403,13 +1373,12 @@
 //#define SKEW_CORRECTION
 
 #if ENABLED(SKEW_CORRECTION)
-  // Input all length measurements here:
+  // 在此处输入所有长度测量值：
   #define XY_DIAG_AC 282.8427124746
   #define XY_DIAG_BD 282.8427124746
   #define XY_SIDE_AD 200
 
-  // Or, set the default skew factors directly here
-  // to override the above measurements:
+  // 或者直接在此处设置默认的偏斜系数以覆盖上述测量值：
   #define XY_SKEW_FACTOR 0.0
 
   //#define SKEW_CORRECTION_FOR_Z
@@ -1423,12 +1392,12 @@
     #define YZ_SKEW_FACTOR 0.0
   #endif
 
-  // Enable this option for M852 to set skew at runtime
+  // 为M852启用此选项以在运行时设置偏斜
   //#define SKEW_CORRECTION_GCODE
 #endif
 
 //=============================================================================
-//============================= Additional Features ===========================
+//========================= Additional Features 附加功能 ======================
 //=============================================================================
 
 // @section extras
@@ -1436,92 +1405,87 @@
 /**
  * EEPROM
  *
- * Persistent storage to preserve configurable settings across reboots.
+ * 永久存储，可在重新启动后保留可配置的设置。
  *
- *   M500 - Store settings to EEPROM.
- *   M501 - Read settings from EEPROM. (i.e., Throw away unsaved changes)
- *   M502 - Revert settings to "factory" defaults. (Follow with M500 to init the EEPROM.)
+ *   M500 - 将设置存储到EEPROM。
+ *   M501 - 从EEPROM读取设置。（即，丢弃未保存的更改）
+ *   M502 - 将设置恢复为“出厂”默认设置。（接着用M500初始化EEPROM。）
  */
-//#define EEPROM_SETTINGS     // Persistent storage with M500 and M501
-//#define DISABLE_M503        // Saves ~2700 bytes of PROGMEM. Disable for release!
-#define EEPROM_CHITCHAT       // Give feedback on EEPROM commands. Disable to save PROGMEM.
-#define EEPROM_BOOT_SILENT    // Keep M503 quiet and only give errors during first load
+//#define EEPROM_SETTINGS     // M500和M501的永久存储
+//#define DISABLE_M503        // 保存〜2700字节的PROGMEM。 禁止发布！
+#define EEPROM_CHITCHAT       // 提供有关EEPROM命令的反馈。 禁用保存PROGMEM。
+#define EEPROM_BOOT_SILENT    // 保持M503安静，仅在首次加载时给出错误
 #if ENABLED(EEPROM_SETTINGS)
-  //#define EEPROM_AUTO_INIT  // Init EEPROM automatically on any errors.
+  //#define EEPROM_AUTO_INIT  // 如有任何错误，将自动初始化EEPROM。
 #endif
 
 //
-// Host Keepalive
+// 主机保持活动
 //
-// When enabled Marlin will send a busy status message to the host
-// every couple of seconds when it can't accept commands.
+// 启用后，当Marlin无法接受命令时，它将每隔几秒钟向host发送一个忙碌状态消息。
 //
-#define HOST_KEEPALIVE_FEATURE        // Disable this if your host doesn't like keepalive messages
-#define DEFAULT_KEEPALIVE_INTERVAL 2  // Number of seconds between "busy" messages. Set with M113.
-#define BUSY_WHILE_HEATING            // Some hosts require "busy" messages even during heating
+#define HOST_KEEPALIVE_FEATURE        // 如果您的主机不喜欢保持活动消息，请禁用此功能
+#define DEFAULT_KEEPALIVE_INTERVAL 2  // “繁忙”消息之间的秒数。 用M113设置。
+#define BUSY_WHILE_HEATING            // 有些主机即使在加热期间也需要“忙”消息
 
 //
-// G20/G21 Inch mode support
+// G20 / G21英寸模式支持
 //
 //#define INCH_MODE_SUPPORT
 
 //
-// M149 Set temperature units support
+// M149设定温度单位支持
 //
 //#define TEMPERATURE_UNITS_SUPPORT
 
 // @section temperature
 
-// Preheat Constants
+// 预热常数
 #define PREHEAT_1_LABEL       "PLA"
 #define PREHEAT_1_TEMP_HOTEND 180
 #define PREHEAT_1_TEMP_BED     70
-#define PREHEAT_1_FAN_SPEED     0 // Value from 0 to 255
+#define PREHEAT_1_FAN_SPEED     0 // 值： 0 到 255
 
 #define PREHEAT_2_LABEL       "ABS"
 #define PREHEAT_2_TEMP_HOTEND 240
 #define PREHEAT_2_TEMP_BED    110
-#define PREHEAT_2_FAN_SPEED     0 // Value from 0 to 255
+#define PREHEAT_2_FAN_SPEED     0 // 值： 0 到 255
 
 /**
- * Nozzle Park
+ * 喷嘴
  *
- * Park the nozzle at the given XYZ position on idle or G27.
+ * 将喷嘴停在怠速或G27上给定的XYZ位置。
  *
- * The "P" parameter controls the action applied to the Z axis:
+ * “P”参数控制应用于Z轴的动作:
  *
- *    P0  (Default) If Z is below park Z raise the nozzle.
- *    P1  Raise the nozzle always to Z-park height.
- *    P2  Raise the nozzle by Z-park amount, limited to Z_MAX_POS.
+ *    P0  (默认)如果Z在park Z以下，则提高喷嘴。
+ *    P1  将喷嘴提升到Z-park高度。
+ *    P2  提高喷嘴数量Z-park，限制在Z_MAX_POS。
  */
 //#define NOZZLE_PARK_FEATURE
 
 #if ENABLED(NOZZLE_PARK_FEATURE)
-  // Specify a park position as { X, Y, Z_raise }
+  // 将park位置指定为{X, Y, Z_raise}
   #define NOZZLE_PARK_POINT { (X_MIN_POS + 10), (Y_MAX_POS - 10), 20 }
-  #define NOZZLE_PARK_XY_FEEDRATE 100   // (mm/s) X and Y axes feedrate (also used for delta Z axis)
-  #define NOZZLE_PARK_Z_FEEDRATE 5      // (mm/s) Z axis feedrate (not used for delta printers)
-#endif
+  #define NOZZLE_PARK_XY_FEEDRATE 100   // (mm/s) X、Y轴进给速度(也用于Z轴)
+  #define NOZZLE_PARK_Z_FEEDRATE 5      // (mm/s) Z轴进给速度(不用于delta打印机)
+# endif
 
 /**
- * Clean Nozzle Feature -- EXPERIMENTAL
+ * 喷嘴清洁功能——实验性
  *
- * Adds the G12 command to perform a nozzle cleaning process.
+ * 添加G12命令以执行喷嘴清洗过程。
  *
- * Parameters:
- *   P  Pattern
- *   S  Strokes / Repetitions
- *   T  Triangles (P1 only)
+ * 参数:
+ *   P  模式
+ *   S  行程 / 重复
+ *   T  三角形（仅限P1）
  *
- * Patterns:
- *   P0  Straight line (default). This process requires a sponge type material
- *       at a fixed bed location. "S" specifies strokes (i.e. back-forth motions)
- *       between the start / end points.
+ * 参数:
+ *   P0  直线（默认）。该过程需要在固定床位置使用海绵型材料。 “ S”指定起点/终点之间的笔划（即后退运动）。
  *
- *   P1  Zig-zag pattern between (X0, Y0) and (X1, Y1), "T" specifies the
- *       number of zig-zag triangles to do. "S" defines the number of strokes.
- *       Zig-zags are done in whichever is the narrower dimension.
- *       For example, "G12 P1 S1 T3" will execute:
+ *   P1  在（X0，Y0）和（X1，Y1）之间的Z字形模式，“ T”指定要执行的Z字形三角形的数量。 “ S”定义笔划数。 
+ *       之字形以较窄的尺寸为准。 例如，将执行“ G12 P1 S1 T3”：
  *
  *          --
  *         |  (X0, Y1) |     /\        /\        /\     | (X1, Y1)
@@ -1544,41 +1508,41 @@
 //#define NOZZLE_CLEAN_FEATURE
 
 #if ENABLED(NOZZLE_CLEAN_FEATURE)
-  // Default number of pattern repetitions
+  // 模式重复的默认次数
   #define NOZZLE_CLEAN_STROKES  12
 
-  // Default number of triangles
+  // 默认三角形数
   #define NOZZLE_CLEAN_TRIANGLES  3
 
-  // Specify positions for each tool as { { X, Y, Z }, { X, Y, Z } }
+  // 将每个工具的位置指定为 { { X, Y, Z }, { X, Y, Z } }
   // Dual hotend system may use { {  -20, (Y_BED_SIZE / 2), (Z_MIN_POS + 1) },  {  420, (Y_BED_SIZE / 2), (Z_MIN_POS + 1) }}
   #define NOZZLE_CLEAN_START_POINT { {  30, 30, (Z_MIN_POS + 1) } }
   #define NOZZLE_CLEAN_END_POINT   { { 100, 60, (Z_MIN_POS + 1) } }
 
-  // Circular pattern radius
+  // 圆形图案半径
   #define NOZZLE_CLEAN_CIRCLE_RADIUS 6.5
-  // Circular pattern circle fragments number
+  // 圆形模式圆碎片数
   #define NOZZLE_CLEAN_CIRCLE_FN 10
-  // Middle point of circle
+  // 圆的中点
   #define NOZZLE_CLEAN_CIRCLE_MIDDLE NOZZLE_CLEAN_START_POINT
 
-  // Move the nozzle to the initial position after cleaning
+  // 清洁后将喷嘴移至初始位置
   #define NOZZLE_CLEAN_GOBACK
 
-  // Enable for a purge/clean station that's always at the gantry height (thus no Z move)
+  // 启用清洗/清洗站，使其始终处于机架高度(因此没有Z向移动)
   //#define NOZZLE_CLEAN_NO_Z
 #endif
 
 /**
- * Print Job Timer
+ * 打印作业计时器
  *
- * Automatically start and stop the print job timer on M104/M109/M190.
+ * 在M104/M109/M190上自动启动和停止打印作业计时器。
  *
  *   M104 (hotend, no wait) - high temp = none,        low temp = stop timer
  *   M109 (hotend, wait)    - high temp = start timer, low temp = stop timer
  *   M190 (bed, wait)       - high temp = start timer, low temp = none
  *
- * The timer can also be controlled with the following commands:
+ * 定时器也可以通过以下命令来控制:
  *
  *   M75 - Start the print job timer
  *   M76 - Pause the print job timer
@@ -1587,121 +1551,116 @@
 #define PRINTJOB_TIMER_AUTOSTART
 
 /**
- * Print Counter
+ * 打印计数器
  *
- * Track statistical data such as:
+ * 跟踪统计数据，如:
  *
- *  - Total print jobs
- *  - Total successful print jobs
- *  - Total failed print jobs
- *  - Total time printing
+ *  - 总打印作业
+ *  - 打印作业全部成功
+ *  - 打印作业总数失败
+ *  - 总打印时间
  *
- * View the current statistics with M78.
+ * 使用M78查看当前统计数据。
  */
 //#define PRINTCOUNTER
 
 //=============================================================================
-//============================= LCD and SD support ============================
+//========================= LCD and SD support 屏幕支持 =======================
 //=============================================================================
 
 // @section lcd
 
 /**
- * LCD LANGUAGE
+ * 面板语言设定
  *
- * Select the language to display on the LCD. These languages are available:
+ * 选择要在LCD上显示的语言。这些语言是可用的:
  *
  *   en, an, bg, ca, cz, da, de, el, el_gr, es, eu, fi, fr, gl, hr, it, jp_kana,
  *   ko_KR, nl, pl, pt, pt_br, ru, sk, tr, uk, vi, zh_CN, zh_TW, test
  *
  * :{ 'en':'English', 'an':'Aragonese', 'bg':'Bulgarian', 'ca':'Catalan', 'cz':'Czech', 'da':'Danish', 'de':'German', 'el':'Greek', 'el_gr':'Greek (Greece)', 'es':'Spanish', 'eu':'Basque-Euskera', 'fi':'Finnish', 'fr':'French', 'gl':'Galician', 'hr':'Croatian', 'it':'Italian', 'jp_kana':'Japanese', 'ko_KR':'Korean (South Korea)', 'nl':'Dutch', 'pl':'Polish', 'pt':'Portuguese', 'pt_br':'Portuguese (Brazilian)', 'ru':'Russian', 'sk':'Slovak', 'tr':'Turkish', 'uk':'Ukrainian', 'vi':'Vietnamese', 'zh_CN':'Chinese (Simplified)', 'zh_TW':'Chinese (Traditional)', 'test':'TEST' }
  */
-#define LCD_LANGUAGE en
+#define LCD_LANGUAGE zh_CN
 
 /**
- * LCD Character Set
+ * 液晶字符集
  *
- * Note: This option is NOT applicable to Graphical Displays.
+ * 注意:此选项不适用于图形显示。
  *
- * All character-based LCDs provide ASCII plus one of these
- * language extensions:
+ * 所有基于字符的LCD都提供ASCII和其中一种语言扩展:
  *
  *  - JAPANESE ... the most common
  *  - WESTERN  ... with more accented characters
  *  - CYRILLIC ... for the Russian language
  *
- * To determine the language extension installed on your controller:
+ * 要确定语言扩展安装在您的控制器:
  *
- *  - Compile and upload with LCD_LANGUAGE set to 'test'
- *  - Click the controller to view the LCD menu
- *  - The LCD will display Japanese, Western, or Cyrillic text
+ *  - 将LCD_LANGUAGE设置为“test”编译并上传
+ *  - 点击控制器查看LCD菜单
+ *  - LCD将显示JAPANESE、WESTERN或CYRILLIC的文本
  *
- * See http://marlinfw.org/docs/development/lcd_language.html
+ * 查看 http://marlinfw.org/docs/development/lcd_language.html
  *
  * :['JAPANESE', 'WESTERN', 'CYRILLIC']
  */
 #define DISPLAY_CHARSET_HD44780 JAPANESE
 
 /**
- * Info Screen Style (0:Classic, 1:Prusa)
+ * 信息屏幕样式 (0:Classic, 1:Prusa)
  *
  * :[0:'Classic', 1:'Prusa']
  */
 #define LCD_INFO_SCREEN_STYLE 0
 
 /**
- * SD CARD
+ * SD储存卡
  *
- * SD Card support is disabled by default. If your controller has an SD slot,
- * you must uncomment the following option or it won't work.
+ * SD卡支持在默认情况下是禁用的。如果你的控制器有一个SD插槽，你必须取消注释下面的选项，否则它将无法工作。
  *
  */
 //#define SDSUPPORT
 
 /**
- * SD CARD: SPI SPEED
+ * SD储存卡: SPI 速度
  *
- * Enable one of the following items for a slower SPI transfer speed.
- * This may be required to resolve "volume init" errors.
+ * 启用下列项目之一以获得较慢的SPI传输速度。
+ * 这可能需要解决“卷初始化”错误。
  */
 //#define SPI_SPEED SPI_HALF_SPEED
 //#define SPI_SPEED SPI_QUARTER_SPEED
 //#define SPI_SPEED SPI_EIGHTH_SPEED
 
 /**
- * SD CARD: ENABLE CRC
+ * SD储存卡: 启用 CRC检查
  *
- * Use CRC checks and retries on the SD communication.
+ * 在SD通信上使用CRC检查和重试。
  */
 //#define SD_CHECK_AND_RETRY
 
 /**
- * LCD Menu Items
+ * LCD菜单项
  *
- * Disable all menus and only display the Status Screen, or
- * just remove some extraneous menu items to recover space.
+ * 禁用所有菜单，只显示状态屏幕，或者删除一些无关的菜单项来恢复空间。
  */
 //#define NO_LCD_MENUS
 //#define SLIM_LCD_MENUS
 
 //
-// ENCODER SETTINGS
+// 编码设置
 //
-// This option overrides the default number of encoder pulses needed to
-// produce one step. Should be increased for high-resolution encoders.
+// 此选项覆盖产生一个步骤所需的默认编码脉冲数。应增加高分辨率编码器。
 //
 //#define ENCODER_PULSES_PER_STEP 4
 
 //
-// Use this option to override the number of step signals required to
-// move between next/prev menu items.
+// 使用此选项可覆盖在next/prev菜单项之间移动所需的步骤信号数量。
 //
 //#define ENCODER_STEPS_PER_MENU_ITEM 1
 
 /**
- * Encoder Direction Options
+ * 编码器方向选择
  *
- * Test your encoder's behavior first with both options disabled.
+ * 先测试编码器的行为，禁用这两个选项。
  *
  *  Reversed Value Edit and Menu Nav? Enable REVERSE_ENCODER_DIRECTION.
  *  Reversed Menu Navigation only?    Enable REVERSE_MENU_DIRECTION.
@@ -1709,49 +1668,49 @@
  */
 
 //
-// This option reverses the encoder direction everywhere.
+// 此选项将反转所有编码器的方向。
 //
-//  Set this option if CLOCKWISE causes values to DECREASE
+//  如果顺时针导致值减小，则设置此选项
 //
 //#define REVERSE_ENCODER_DIRECTION
 
 //
-// This option reverses the encoder direction for navigating LCD menus.
+// 此选项反转用于导航LCD菜单的编码器方向。
 //
-//  If CLOCKWISE normally moves DOWN this makes it go UP.
-//  If CLOCKWISE normally moves UP this makes it go DOWN.
+//  如果顺时针向下移动，它就会向上移动。
+//  如果顺时针向上移动，它就会向下移动。
 //
 //#define REVERSE_MENU_DIRECTION
 
 //
-// This option reverses the encoder direction for Select Screen.
+// 此选项将反转选择屏幕的编码器方向。
 //
-//  If CLOCKWISE normally moves LEFT this makes it go RIGHT.
-//  If CLOCKWISE normally moves RIGHT this makes it go LEFT.
+//  如果顺时针向左移动，它就会向右移动。
+//  如果顺时针向右移动，它就会向左移动。
 //
 //#define REVERSE_SELECT_DIRECTION
 
 //
-// Individual Axis Homing
+// 单轴归位
 //
-// Add individual axis homing items (Home X, Home Y, and Home Z) to the LCD menu.
+// 将单个轴归位项目（Home X，Home Y和Home Z）添加到LCD菜单。
 //
 //#define INDIVIDUAL_AXIS_HOMING_MENU
 
 //
-// SPEAKER/BUZZER
+// 扬声器/蜂鸣器
 //
-// If you have a speaker that can produce tones, enable it here.
-// By default Marlin assumes you have a buzzer with a fixed frequency.
+// 如果您的扬声器可以发出声音，请在此处启用它。
+// 默认情况下，Marlin假设您有固定频率的蜂鸣器。
 //
 //#define SPEAKER
 
 //
-// The duration and frequency for the UI feedback sound.
-// Set these to 0 to disable audio feedback in the LCD menus.
+// UI反馈声音的持续时间和频率。
+// 将它们设置为0可禁用LCD菜单中的音频反馈。
 //
-// Note: Test audio output with the G-Code:
-//  M300 S<frequency Hz> P<duration ms>
+// 注意：使用G代码测试音频输出：
+// M300 S <频率Hz> P <持续时间ms>
 //
 //#define LCD_FEEDBACK_FREQUENCY_DURATION_MS 2
 //#define LCD_FEEDBACK_FREQUENCY_HZ 5000
@@ -1759,6 +1718,7 @@
 //=============================================================================
 //======================== LCD / Controller Selection =========================
 //========================   (Character-based LCDs)   =========================
+//======================LCD /控制器选择（基于字符的LCD）=======================
 //=============================================================================
 
 //
@@ -1827,13 +1787,14 @@
 //=============================================================================
 //======================== LCD / Controller Selection =========================
 //=====================   (I2C and Shift-Register LCDs)   =====================
+//===========================I2C和移位寄存器LCD================================
 //=============================================================================
 
 //
-// CONTROLLER TYPE: I2C
+// 控制器类型：I2C
 //
-// Note: These controllers require the installation of Arduino's LiquidCrystal_I2C
-// library. For more info: https://github.com/kiyoshigawa/LiquidCrystal_I2C
+// 注意：这些控制器需要安装Arduino的LiquidCrystal_I2C库。
+// 更多信息: https://github.com/kiyoshigawa/LiquidCrystal_I2C
 //
 
 //
@@ -1894,10 +1855,11 @@
 //=============================================================================
 //=======================   LCD / Controller Selection  =======================
 //=========================      (Graphical LCDs)      ========================
+//================================= 图形LCD ===================================
 //=============================================================================
 
 //
-// CONTROLLER TYPE: Graphical 128x64 (DOGM)
+// 控制器类型：图形 128x64（DOGMA）
 //
 // IMPORTANT: The U8glib library is required for Graphical Display!
 //            https://github.com/olikraus/U8glib_Arduino
@@ -2016,11 +1978,11 @@
 //#define SILVER_GATE_GLCD_CONTROLLER
 
 //=============================================================================
-//==============================  OLED Displays  ==============================
+//========================  OLED Displays OLED显示器 ==========================
 //=============================================================================
 
 //
-// SSD1306 OLED full graphics generic display
+// SSD1306 OLED全图形通用显示器
 //
 //#define U8GLIB_SSD1306
 
@@ -2058,11 +2020,11 @@
 //#define OVERLORD_OLED
 
 //=============================================================================
-//========================== Extensible UI Displays ===========================
+//=============== Extensible UI Displays 可扩展的UI显示 =======================
 //=============================================================================
 
 //
-// DGUS Touch Display with DWIN OS. (Choose one.)
+// 带有DWIN OS的DGUS触摸屏。 （选一个）
 //
 //#define DGUS_LCD_UI_ORIGIN
 //#define DGUS_LCD_UI_FYSETC
@@ -2086,16 +2048,16 @@
 //#define EXTENSIBLE_UI
 
 //=============================================================================
-//=============================== Graphical TFTs ==============================
+//======================== Graphical TFTs 图形TFT ==============================
 //=============================================================================
 
 //
-// FSMC display (MKS Robin, Alfawise U20, JGAurora A5S, REXYZ A1, etc.)
+// FSMC显示屏（MKS Robin，Alfawise U20，JGAurora A5S，REXYZ A1等）
 //
 //#define FSMC_GRAPHICAL_TFT
 
 //=============================================================================
-//============================  Other Controllers  ============================
+//=====================  Other Controllers  其他控制器 ========================
 //=============================================================================
 
 //
@@ -2120,73 +2082,64 @@
 //#define REPRAPWORLD_KEYPAD_MOVE_STEP 10.0 // (mm) Distance to move per key-press
 
 //=============================================================================
-//=============================== Extra Features ==============================
+//========================== Extra Features 额外功能 ==========================
 //=============================================================================
 
 // @section extras
 
-// Increase the FAN PWM frequency. Removes the PWM noise but increases heating in the FET/Arduino
+// 增加FAN PWM频率以便消除PWM噪声但会增加FET/Arduino的发热
 //#define FAST_PWM_FAN
 
-// Use software PWM to drive the fan, as for the heaters. This uses a very low frequency
-// which is not as annoying as with the hardware PWM. On the other hand, if this frequency
-// is too low, you should also increment SOFT_PWM_SCALE.
+// 与加热器一样，使用软件PWM驱动风扇。 这使用了非常低的频率，不像硬件PWM那样令人讨厌。 
+// 另一方面，如果该频率太低，则还应该增加SOFT_PWM_SCALE。
 //#define FAN_SOFT_PWM
 
-// Incrementing this by 1 will double the software PWM frequency,
-// affecting heaters, and the fan if FAN_SOFT_PWM is enabled.
-// However, control resolution will be halved for each increment;
-// at zero value, there are 128 effective control positions.
+// 增加1将使软件PWM频率加倍，影响加热器，如果FAN_SOFT_PWM是启用的风扇。然而，控制分辨率会增加一半;
+// 在零值时，有128个有效控制位置。
 // :[0,1,2,3,4,5,6,7]
 #define SOFT_PWM_SCALE 0
 
-// If SOFT_PWM_SCALE is set to a value higher than 0, dithering can
-// be used to mitigate the associated resolution loss. If enabled,
-// some of the PWM cycles are stretched so on average the desired
-// duty cycle is attained.
+// 如果将SOFT_PWM_SCALE设置为大于0的值，则可以使用抖动来减轻相关的分辨率损失。
+// 如果启用，一些PWM周期被拉伸，从而平均达到期望的占空比。
 //#define SOFT_PWM_DITHER
 
-// Temperature status LEDs that display the hotend and bed temperature.
-// If all hotends, bed temperature, and target temperature are under 54C
-// then the BLUE led is on. Otherwise the RED led is on. (1C hysteresis)
+// 温度状态led，显示加热头和热床温度。
+// 如果所有的温度、热床温度和目标温度都低于54C，那么蓝色的led就亮了。否则，红色的led灯就亮了。(1C延迟)
 //#define TEMP_STAT_LEDS
 
-// SkeinForge sends the wrong arc g-codes when using Arc Point as fillet procedure
+// 当使用弧点作为圆角过程时，SkeinForge发送了错误的弧G代码
 //#define SF_ARC_FIX
 
-// Support for the BariCUDA Paste Extruder
+// 支持BariCUDA糊状挤出机
 //#define BARICUDA
 
-// Support for BlinkM/CyzRgb
+// 支持BlinkM / CyzRgb
 //#define BLINKM
 
-// Support for PCA9632 PWM LED driver
+// 支持PCA9632 PWM LED驱动器
 //#define PCA9632
 
-// Support for PCA9533 PWM LED driver
+// 支持PCA9533 PWM LED驱动器
 // https://github.com/mikeshub/SailfishRGB_LED
 //#define PCA9533
 
 /**
- * RGB LED / LED Strip Control
+ *RGB LED / LED灯带控制
  *
- * Enable support for an RGB LED connected to 5V digital pins, or
- * an RGB Strip connected to MOSFETs controlled by digital pins.
+ * 启用对连接到5V数字引脚的RGB LED或连接到由数字引脚控制的MOSFET的RGB条的支持。
  *
- * Adds the M150 command to set the LED (or LED strip) color.
- * If pins are PWM capable (e.g., 4, 5, 6, 11) then a range of
- * luminance values can be set from 0 to 255.
- * For Neopixel LED an overall brightness parameter is also available.
+ * 添加M150命令以设置LED（或LED灯带）颜色。
+ * 如果引脚具有PWM功能（例如4、5、6、11），则可以将亮度值的范围设置为0至255。
+ * 对于Neopixel LED，还可以提供整体亮度参数。
  *
- * *** CAUTION ***
- *  LED Strips require a MOSFET Chip between PWM lines and LEDs,
- *  as the Arduino cannot handle the current the LEDs will require.
- *  Failure to follow this precaution can destroy your Arduino!
- *  NOTE: A separate 5V power supply is required! The Neopixel LED needs
- *  more current than the Arduino 5V linear regulator can produce.
- * *** CAUTION ***
+ * *** 警告 ***
+ *  LED条需要在PWM线和LED之间使用MOSFET芯片，因为Arduino无法处理LED所需的电流。
+ *  不遵循此预防措施可能会破坏您的Arduino！
+ *  注意：需要单独的5V电源！ Neopixel LED需求
+ *  比Arduino 5V线性稳压器产生的电流更大。
+ * *** 警告 ***
  *
- * LED Type. Enable only one of the following two options.
+ * LED类型。 仅启用以下两个选项之一。
  *
  */
 //#define RGB_LED
@@ -2199,59 +2152,59 @@
   //#define RGB_LED_W_PIN -1
 #endif
 
-// Support for Adafruit Neopixel LED driver
+// 支持Adafruit Neopixel LED驱动器
 //#define NEOPIXEL_LED
 #if ENABLED(NEOPIXEL_LED)
-  #define NEOPIXEL_TYPE   NEO_GRBW // NEO_GRBW / NEO_GRB - four/three channel driver type (defined in Adafruit_NeoPixel.h)
-  #define NEOPIXEL_PIN     4       // LED driving pin
+  #define NEOPIXEL_TYPE   NEO_GRBW // NEO_GRBW / NEO_GRB-四/三通道驱动程序类型（在Adafruit_NeoPixel.h中定义）
+  #define NEOPIXEL_PIN     4       // LED驱动引脚
   //#define NEOPIXEL2_TYPE NEOPIXEL_TYPE
   //#define NEOPIXEL2_PIN    5
-  #define NEOPIXEL_PIXELS 30       // Number of LEDs in the strip, larger of 2 strips if 2 neopixel strips are used
-  #define NEOPIXEL_IS_SEQUENTIAL   // Sequential display for temperature change - LED by LED. Disable to change all LEDs at once.
-  #define NEOPIXEL_BRIGHTNESS 127  // Initial brightness (0-255)
-  //#define NEOPIXEL_STARTUP_TEST  // Cycle through colors at startup
+  #define NEOPIXEL_PIXELS 30       // 灯条中的LED数量，如果使用2个新像素灯条，则大于2个灯条
+  #define NEOPIXEL_IS_SEQUENTIAL   // 温度变化的顺序显示-逐个LED。 禁用一次更改所有LED。
+  #define NEOPIXEL_BRIGHTNESS 127  // 初始亮度（0-255）
+  //#define NEOPIXEL_STARTUP_TEST  // 启动时循环显示颜色
 
-  // Use a single Neopixel LED for static (background) lighting
-  //#define NEOPIXEL_BKGD_LED_INDEX  0               // Index of the LED to use
+  // 使用单个Neopixel LED进行静态（背景）照明
+  //#define NEOPIXEL_BKGD_LED_INDEX  0               // 使用的LED的索引
   //#define NEOPIXEL_BKGD_COLOR { 255, 255, 255, 0 } // R, G, B, W
 #endif
 
 /**
- * Printer Event LEDs
+ * 打印机事件指示灯
  *
- * During printing, the LEDs will reflect the printer status:
+ * 在打印过程中，LED将反映打印机状态：
  *
- *  - Gradually change from blue to violet as the heated bed gets to target temp
- *  - Gradually change from violet to red as the hotend gets to temperature
- *  - Change to white to illuminate work surface
- *  - Change to green once print has finished
- *  - Turn off after the print has finished and the user has pushed a button
+ *  - 随着加热床达到目标温度，逐渐从蓝色变为紫色
+ *  - 随着温度上升，紫罗兰色逐渐变为红色
+ *  - 变为白色以照亮工作表面
+ *  - 打印完成后变为绿色
+ *  - 打印完成，用户按下按钮后关闭
  */
 #if ANY(BLINKM, RGB_LED, RGBW_LED, PCA9632, PCA9533, NEOPIXEL_LED)
   #define PRINTER_EVENT_LEDS
 #endif
 
 /**
- * R/C SERVO support
+ * R/C 伺服电机支持
  * Sponsored by TrinityLabs, Reworked by codexmas
  */
 
 /**
- * Number of servos
+ * 伺服数
  *
- * For some servo-related options NUM_SERVOS will be set automatically.
- * Set this manually if there are extra servos needing manual control.
- * Leave undefined or set to 0 to entirely disable the servo subsystem.
+ * 对于某些与伺服相关的选项，将自动设置NUM_SERVOS。
+ * 如果还有其他需要手动控制的伺服器，请手动设置。
+ * 保留未定义或设置为0可以完全禁用伺服子系统。
  */
-//#define NUM_SERVOS 3 // Servo index starts with 0 for M280 command
+//#define NUM_SERVOS 3 // M280命令的伺服索引从0开始
 
-// (ms) Delay  before the next move will start, to give the servo time to reach its target angle.
-// 300ms is a good value but you can try less delay.
-// If the servo can't reach the requested position, increase it.
+// (ms) 在下一个动作开始之前要延迟一定的时间，以使伺服系统有时间达到其目标角度。
+// 300ms 是一个很好的值，但是您可以尝试减少延迟。
+// 如果伺服器无法到达要求的位置，请增加它。
 #define SERVO_DELAY { 300 }
 
-// Only power servos during movement, otherwise leave off to prevent jitter
+// 在运动过程中仅对功率伺服器供电，否则应避免抖动
 //#define DEACTIVATE_SERVOS_AFTER_MOVE
 
-// Allow servo angle to be edited and saved to EEPROM
+// 允许编辑伺服角度并将其保存到EEPROM
 //#define EDITABLE_SERVO_ANGLES

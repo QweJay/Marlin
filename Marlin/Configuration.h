@@ -143,7 +143,7 @@
 // 一般的直径有（1.75, 2.85, 3.0, ...）用于体积、丝宽传感器等。
 #define DEFAULT_NOMINAL_FILAMENT_DIA 3.0
 
-// 用于multi-extruder或任何共用一个喷嘴的“多挤出机”。
+// 开启多挤出机混色打印。
 //#define SINGLENOZZLE
 
 /**
@@ -449,8 +449,8 @@
 
 // 高于此温度，加热器将关闭。
 // 这可以保护组件免受过热的影响，但不能防止短路和故障。
-// （使用 MinTEMP 进行热敏电阻短路/故障保护)。
-#define HEATER_0_MAXTEMP 275
+//（使用 MinTEMP 进行热敏电阻短路/故障保护)。
+#define HEATER_0_MAXTEMP 275  //1号打印头的最大温度，下面以此类推
 #define HEATER_1_MAXTEMP 275
 #define HEATER_2_MAXTEMP 275
 #define HEATER_3_MAXTEMP 275
@@ -480,7 +480,7 @@
                                   // 使用G代码设置/获取：M301 E_挤出机编号，0-2]
   #define PID_FUNCTIONAL_RANGE 10 // 如果目标温度和实际温度之间的温差超过PID_FUNCTIONAL_RANGE然后PID将关闭，加热器将设置为最小/最大。
 
-  // 如果使用预配置的 hotend，则可以通过取消注释来使用其中一个值集
+  // 如果使用预配置的Hotend挤出头，则可以通过取消注释来使用其中一个值集
 
   // Ultimaker
   #define DEFAULT_Kp 22.2
@@ -549,8 +549,9 @@
 /**
  * 如果温度低于EXTRUDE_MINTEMP，则防止挤出。
  * 添加M302设置最小挤出温度和/或转向
- * 防止冷挤压断续。
- *
+ * 防止冷挤压断断续续。
+ * 设置挤出机工作的最小温度，只有达到指定温度，挤出机电机才会转动，以此保护送丝轮挤不动造成磨损。
+ * 所以如果发现挤出机不工作，请先查看打印头是否加热到指定温度。
  * ***强烈建议启用此选项!***
  */
 #define PREVENT_COLD_EXTRUSION
@@ -561,7 +562,7 @@
  * 注意:对于Bowden挤出机来说，这个尺寸足够大，可以进行加载/卸载。
  */
 #define PREVENT_LENGTHY_EXTRUDE
-#define EXTRUDE_MAXLENGTH 200
+#define EXTRUDE_MAXLENGTH 200  //设置挤出机挤出耗材的最大长度，防止误操作造成损失。
 
 //===========================================================================
 //=============== Thermal Runaway Protection 热失控保护======================
@@ -584,7 +585,7 @@
 //===========================================================================
 
 // @section machine
-
+// 双轴联动结构
 // 取消注释这些选项之一，以通常的顺序启用CoreXY，CoreXZ或CoreYZ运动选项，或反转
 //#define COREXY
 //#define COREXZ
@@ -608,6 +609,12 @@
 //#define USE_YMAX_PLUG
 //#define USE_ZMAX_PLUG
 
+// 限位开关上拉
+/**
+ * ENDSTOPPULLUPS 去掉注释的话表示所有限位开关上拉，上拉表示对应引脚悬空的情况下默认是高电平，
+ * 即限位开关开路状态下是H电平状态。Makeboard系列主板必须开启此项。如注释掉此项的话，可在下面代码单独配置XYZ轴MAX和MIN限位开关上拉状态。
+ * 如去掉 ENDSTOPPULLUP_XMAX 注释可单独开启X-MAX限位开关上拉。
+ */
 // 对所有端点启用上拉，以防止出现浮动状态
 #define ENDSTOPPULLUPS
 #if DISABLED(ENDSTOPPULLUPS)
@@ -634,6 +641,11 @@
   //#define ENDSTOPPULLDOWN_ZMIN_PROBE
 #endif
 
+// 限位开关信号
+/**
+ * X_MIN_ENDSTOP_INVERTING 等系列参数设置为 true 表示将限位开关的信号反转，针对限位开关的常开和长闭状态，如触发状态不符合预期，可在此处修正。
+ * Z_MIN_PROBE_ENDSTOP_INVERTING 表示自动调平使用的探针电平状态，如不时触底时才触发，可在此反转。
+ */
 // 机械端挡块，COM接地，NC接信号，此处使用“ false”（最常见的设置）。
 #define X_MIN_ENDSTOP_INVERTING false       // 设置为true以反转结束停止的逻辑。
 #define Y_MIN_ENDSTOP_INVERTING false       // 设置为true以反转结束停止的逻辑。
@@ -717,12 +729,23 @@
  * 可使用 M92 覆盖
  *                                      X, Y, Z, E0 [, E1[, E2...]]
  */
+
+/**
+* 电机步进数
+* 后面的四个数字 {80,80,4000,500} ，分别表示XYZ和挤出机电机的步进数。
+* XYZ电机步进公式为：(360 / 电机步距角 * 细分数 ) / (同步带齿距 * 齿数)
+ */
 #define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 4000, 500 }
 
 /**
  * 默认最大进给速率(mm/s)
  * 可使用 M203 覆盖
  *                                      X, Y, Z, E0 [, E1[, E2...]]
+ *                                      
+ * DEFAULT_MAX_FEEDRATE 后面的四个数字 {300, 300, 5, 25} ，分别表示XYZ和挤出机电机的最大移动速度。
+ * 在实际测试不失步的情况下设置的越大越好，此值和电机步进数相关，步进数越大，对应的移动速度设置越小。
+ * 所以使用大细分数或者丝杆需要减小此值才能保证电机不失步。                                    
+ *                                      
  */
 #define DEFAULT_MAX_FEEDRATE          { 300, 300, 5, 25 }
 
@@ -732,10 +755,15 @@
 #endif
 
 /**
+ * 电机最大加速度
  * 默认最大加速度(更改/秒)更改= mm/s
  * (加速动作的最大开始速度)
  * 可使用 M201 覆盖
  *                                      X, Y, Z, E0 [, E1[, E2...]]
+ *                                      
+ * DEFAULT_MAX_ACCELERATION 后面的四个数字 {3000,3000,100,10000} ，
+ * 分别表示XYZ和挤出机电机的最大加速度。三角洲机型的加速度可以设置的大些，
+ * 其他机型小些，原则也使实际测试，在不失步的情况下设置的越大越好。
  */
 #define DEFAULT_MAX_ACCELERATION      { 3000, 3000, 100, 10000 }
 
@@ -752,9 +780,9 @@
  *   M204 R    Retract Acceleration
  *   M204 T    Travel Acceleration
  */
-#define DEFAULT_ACCELERATION          3000    // X, Y, Z and E acceleration for printing moves
-#define DEFAULT_RETRACT_ACCELERATION  3000    // E acceleration for retracts
-#define DEFAULT_TRAVEL_ACCELERATION   3000    // X, Y, Z acceleration for travel (non printing) moves
+#define DEFAULT_ACCELERATION          3000    // 设置X，Y，Z和E轴电机的默认移动加速度。
+#define DEFAULT_RETRACT_ACCELERATION  3000    // 设置E轴电机回抽时候的默认加速度。
+#define DEFAULT_TRAVEL_ACCELERATION   3000    // 设置E轴电机挤出时候的默认加速度。
 
 /**
  * 默认 Jerk 范围 (mm/s)
@@ -1005,6 +1033,12 @@
 //#define PROBING_STEPPERS_OFF      // 在探测时关闭步进器(除非需要保持位置)
 //#define DELAY_BEFORE_PROBING 200  // (ms)防止振动触发压电传感器
 
+/**
+ * 电机使能信号
+ * X_ENABLE_ON 等系列参数设置为 0 表示电机是低电平使能，1 表示高电平使能。
+ * Makeboard配套驱动芯片均为低电平使能，默认设置即可。如外接驱动器，如果电机不工作，不锁死，可将此参数设为 1 尝试。
+ */
+
 // 对于反相步进器使能引脚(有源低引脚)使用0，非反相(有源高引脚)请使用数值 1
 // :{ 0:'Low', 1:'High' }
 #define X_ENABLE_ON 0
@@ -1012,8 +1046,10 @@
 #define Z_ENABLE_ON 0
 #define E_ENABLE_ON 0 // For all extruders
 
+// 禁用电机
 // 不使用时立即禁用轴步进器。
 // 警告:当电机关闭时，有可能失去位置精度!
+// 如特殊用途，如激光切割机一类，将指定轴，如 DISABLE_Z 设置为 ture 即可禁用Z轴电机。
 #define DISABLE_X false
 #define DISABLE_Y false
 #define DISABLE_Z false
@@ -1028,6 +1064,11 @@
 
 // @section machine
 
+// 电机运动方向
+/** 
+ *  如果复位时候，打印头不是朝限位开关方向移动，可将对应轴，如 INVERT_X_DIR 设置为 true 即可反转X轴电机运动方向。
+ *  如果挤出机电机挤出和回抽动作是反，将对应挤出机，如 INVERT_E0_DIR 设置为 true 即可反转一号挤出机运动方向。
+ */
 // 反转伺服步进方电机方向。如果轴向错误，则更改(或反转电机连接器)。
 #define INVERT_X_DIR false
 #define INVERT_Y_DIR true
@@ -1056,6 +1097,12 @@
 
 //#define Z_AFTER_HOMING  10      //（mm）归零后要移动到的高度
 
+/**
+ * 复位限制开关
+ * 设置各轴复位时触发的限位开关，三角洲机型设置为 1，复位时最大值，三轴限位开关插在MAX接口。
+ * 非三角洲机型一般设置为 -1，复位时为最小值，复位后坐标为 0,0,0，三轴限位开关插在MIN接口。
+ */
+
 // 归位时的挡块方向； 1 =最大，-1 =最小
 // :[-1,1]
 #define X_HOME_DIR -1
@@ -1068,6 +1115,19 @@
 #define X_BED_SIZE 200
 #define Y_BED_SIZE 200
 
+/**
+ * 复位坐标
+ * 
+ * 设置打印机的打印范围，X_MIN_POS，Y_MIN_POS，Z_MIN_POS，
+ * 为打印机最小值方向复位的坐标，一般默认设置为 0 即可。
+ * X_MAX_POS，Y_MAX_POS，Z_MAX_POS 为打印机复位时的坐标值，在开启MAX软复位后，
+ * 为打印机的最大打印范围。一般打印机在调试完后，通过G1指令移动打印头，
+ * M114查看当前坐标测得打印机最大打印范围。三角洲机型需特别注意 Z_MAX_POS 参数，
+ * 为复位后打印头到平台之间的距离，可将此值设置大些，G28复位后，通过G1指令，移动Z轴，
+ * 使打印头接触平台后，通过M114查看当前坐标，即可知道距离是多少了。
+ * 
+ */
+
 // 归位后的行程极限（毫米），对应于挡块位置。
 #define X_MIN_POS 0
 #define Y_MIN_POS 0
@@ -1077,11 +1137,15 @@
 #define Z_MAX_POS 200
 
 /**
- * Software Endstops
- *
+ * 软限位
+ * min_software_endstops 设置为 true 开启的话会使打印头无法移动到负坐标，保护硬件不受损坏。
+ * 实际三角洲机型此值无意义，非三角洲机型因为一般MIN方向有硬限位开关，也不会有问题，开不开启无所谓了。
+ * max_software_endstops 设置为 true 开启的话会使打印头无法移动超过 X_MAX_POS，Y_MAX_POS,Z_MAX_POS 
+ * 设置的坐标，保护硬件不受损坏，一般需要开启，防误操作。
+ * 
  * - 防止移动超出设定的机器范围。
  * - 如果需要，可以禁用单个轴。
- * - X和Y仅适用于笛卡尔坐标是机器。
+ * - X和Y仅适用于笛卡尔坐标的机器。
  * - 使用“ M211”设置软件停止器的开/关或报告当前状态
  */
 
@@ -1106,7 +1170,13 @@
 #endif
 
 /**
- * 进料传感器
+ * 缺料检查
+ * FILAMENT_RUNOUT_SENSOR 去掉注释，即可开启缺料检测功能。
+ * 一般使用光电限位开关装在送丝机耗材入口处，高电平表示正常送丝，低电平表示缺料。
+ * FIL_RUNOUT_INVERTING 设置为 true 可反转限位开关信号。
+ * ENDSTOPPULLUP_FIL_RUNOUT 去掉注释，表示缺料检测引脚默认上拉，一般默认开启。
+ * FILAMENT_RUNOUT_SCRIPT 设置缺料检测激活时运行的脚本，一般为 M600，使打印机暂时打印，换好耗材后，可继续打印。
+ * 
  * 机械或opto端挡用于检查灯丝是否存在。
  *
  * 基于RAMPS的板将SERVO3_PIN用于第一个跳动传感器。
@@ -1130,7 +1200,7 @@
 
   #ifdef FILAMENT_RUNOUT_DISTANCE_MM
     // 启用此选项可使用编码器光盘，该光盘可在灯丝移动时切换跳动销。 
-	//（请确保将FILAMENT_RUNOUT_DISTANCE_MM设置为足够大，以避免误报。）
+  //（请确保将FILAMENT_RUNOUT_DISTANCE_MM设置为足够大，以避免误报。）
     //#define FILAMENT_MOTION_SENSOR
   #endif
 #endif
@@ -1333,7 +1403,11 @@
   #define Z_SAFE_HOMING_Y_POINT ((Y_BED_SIZE) / 2)    // 回原点所有轴（G28）时，Z回原点的Y点。
 #endif
 
-// 回归速度 (mm/m)
+// 复位速度 (mm/m)
+/**
+ * HOMING_FEEDRATE_XY 设置复位时XY轴的移动速度。
+ * HOMING_FEEDRATE_Z 设置复位时Z轴的移动速度，如果用丝杆的话，需要设置的比用皮带慢很多。
+ */
 #define HOMING_FEEDRATE_XY (50*60)
 #define HOMING_FEEDRATE_Z  (4*60)
 
@@ -1406,7 +1480,8 @@
  * EEPROM
  *
  * 永久存储，可在重新启动后保留可配置的设置。
- *
+ * EEPROM_SETTINGS 去掉注释，可开启EEPROM功能，打印机部分配置参数将保存在打印机中，可通过液晶屏实时调节，无需重刷固件。
+ * 配置固件阶段推荐关闭，调试好机器后再开启，要不很可能有参数给代码中调节后不会生效，造成误判断。
  *   M500 - 将设置存储到EEPROM。
  *   M501 - 从EEPROM读取设置。（即，丢弃未保存的更改）
  *   M502 - 将设置恢复为“出厂”默认设置。（接着用M500初始化EEPROM。）
@@ -1440,6 +1515,10 @@
 
 // @section temperature
 
+/*
+ * 预加热
+ * 分别设置液晶屏菜单选择预加热PLA和ABS的打印头，热床温度，及冷却风扇转速。
+ */
 // 预热常数
 #define PREHEAT_1_LABEL       "PLA"
 #define PREHEAT_1_TEMP_HOTEND 180
@@ -1618,7 +1697,7 @@
  * SD卡支持在默认情况下是禁用的。如果你的控制器有一个SD插槽，你必须取消注释下面的选项，否则它将无法工作。
  *
  */
-//#define SDSUPPORT
+#define SDSUPPORT
 
 /**
  * SD储存卡: SPI 速度
@@ -1670,9 +1749,9 @@
 //
 // 此选项将反转所有编码器的方向。
 //
-//  如果顺时针导致值减小，则设置此选项
-//
-//#define REVERSE_ENCODER_DIRECTION
+// 如果顺时针导致值减小，则设置此选项
+// 有些液晶屏旋转编码器方向做反了，需要软件修正，Makeboard配套液晶屏不需要，默认即可。
+//#define REVERSE_ENCODER_DIRECTION  // 去掉注释，反转液晶屏上调节数值旋转编码器方向。
 
 //
 // 此选项反转用于导航LCD菜单的编码器方向。
@@ -1680,7 +1759,7 @@
 //  如果顺时针向下移动，它就会向上移动。
 //  如果顺时针向上移动，它就会向下移动。
 //
-//#define REVERSE_MENU_DIRECTION
+//#define REVERSE_MENU_DIRECTION // 去掉注释，反转液晶屏上选择菜单时旋转编码器方向。
 
 //
 // 此选项将反转选择屏幕的编码器方向。
@@ -1691,19 +1770,19 @@
 //#define REVERSE_SELECT_DIRECTION
 
 //
-// 单轴归位
+// 独立轴复位
 //
 // 将单个轴归位项目（Home X，Home Y和Home Z）添加到LCD菜单。
-//
+// 去掉注释，可在液晶屏上增加单独的复位X，Y，Z轴的菜单，方便调试。
 //#define INDIVIDUAL_AXIS_HOMING_MENU
 
 //
 // 扬声器/蜂鸣器
-//
+// 
 // 如果您的扬声器可以发出声音，请在此处启用它。
 // 默认情况下，Marlin假设您有固定频率的蜂鸣器。
 //
-//#define SPEAKER
+#define SPEAKER // 去掉注释，可开始液晶屏上的蜂鸣器，旋转编码旋转或者按下时蜂鸣器会发声。
 
 //
 // UI反馈声音的持续时间和频率。
@@ -1869,8 +1948,8 @@
 // RepRapDiscount FULL GRAPHIC Smart Controller
 // http://reprap.org/wiki/RepRapDiscount_Full_Graphic_Smart_Controller
 //
-//#define REPRAP_DISCOUNT_FULL_GRAPHIC_SMART_CONTROLLER
-
+#define REPRAP_DISCOUNT_FULL_GRAPHIC_SMART_CONTROLLER // 开启12864液晶屏功能,可能需要u8glib库文件。
+// u8glib下载 ：https://bintray.com/olikraus/u8glib/Arduino
 //
 // ReprapWorld Graphical LCD
 // https://reprapworld.com/?products_details&products_id/1218

@@ -1,25 +1,23 @@
 /**
- * Marlin 3D Printer Firmware
- * Copyright (c) 2020 MarlinFirmware [https://github.com/MarlinFirmware/Marlin]
+ * Marlin 3D打印机固件
+ * 版权所有 (c) 2020 MarlinFirmware [https://github.com/MarlinFirmware/Marlin]
  * Translation from QwejayHuang [https://github.com/QweJay/Marlin]
  * Based on Sprinter and grbl.
- * Copyright (c) 2011 Camiel Gubbels / Erik van der Zalm
+ * 版权所有 (c) 2011 Camiel Gubbels / Erik van der Zalm
  *
- *此程序是免费软件：您可以重新分发和/或修改
- *它遵循由GNU发布的GNU通用公共许可证的条款
- *自由软件基金会，许可证的第3版，或
- *（您可以选择）任何更高版本。
- *
- *分发此程序是希望它会有用，
- *但无任何保证； 甚至没有默示担保
- *特定目的的适销性或适用性。
- *有关更多详细信息，请参见GNU通用公共许可证。
- *
- *您应该已经收到了GNU通用公共许可证的副本
- *与该程序一起。 如果不是，请参见
- *<http://www.gnu.org/licenses/>.
+ *该程序是免费软件：您可以重新发布和/或修改
+ *根据GNU通用公共许可证条款发布
+ *自由软件基金会，许可证的第三版，或者
+ *（可选）任何更新的版本。
+ *这个程序是分发的，希望它会有用，
+ *但没有任何担保; 甚至没有暗示的保证
+ *适销性或针对特定用途的适用性。看到了
+ * GNU通用公共许可证更多细节。
+ *您应该收到GNU通用公共许可证的副本
+ *随着这个程序。如果没有，请参阅
+ *<http://www.gnu.org/licenses/>。
  * /
-#一次编译
+ #一次编译
 
 /**
  * Configuration.h
@@ -29,7 +27,7 @@
  *-电子类型
  *-温度传感器
  *-打印机结构
- *-终端机配置
+ *-Endstop配置
  *-LCD控制器
  *-额外功能
  *
@@ -43,7 +41,7 @@
 //===========================================================================
 
 /**
- * 以下是一些用于校准机器的标准链接:
+ *以下是用于校准机器的一些标准链接：
  *
  * http://reprap.org/wiki/Calibration
  * http://youtu.be/wAL9d7FgInk
@@ -68,7 +66,7 @@
 // @栏目信息
 
 // 在引导期间，此版本的作者信息会打印到主机上
-#define STRING_CONFIG_H_AUTHOR "(none, default config)" // 谁进行了更改.
+#define STRING_CONFIG_H_AUTHOR "(无，默认配置)" // 谁进行了更改.
 //#define CUSTOM_VERSION_FILE Version.h // 根目录的路径（无引号）
 
 /**
@@ -79,7 +77,7 @@
  * 由带有版本号和Web URL的标准Marlin徽标组成。
  *
  * 我们鼓励您利用这项新功能。
- * 谨请您保留未经修改的Marlin引导屏幕。
+ * 请您谨请保留未经修改的Marlin引导屏幕。
  * /
 
 // 启动时显示Marlin引导屏幕。 **可以生产**
@@ -122,17 +120,18 @@
 // 在 AT90USB 设备上启用蓝牙串行接口
 //#define BLUETOOTH
 
-// 从boards.h中选择与您的设置匹配的名称
+//以下定义选择您拥有的电子板。
+//请选择与您的设置匹配的boards.h中的名称
 #ifndef MOTHERBOARD
-  #define MOTHERBOARD BOARD_RAMPS_14_EFB
+  #define MOTHERBOARD BOARD_RAMPS_14_EFB  //定义 主机板 BOARD_RAMPS_14_EFB
 #endif
 
 // LCD“就绪”消息和“信息”菜单中显示的名称
-//#define CUSTOM_MACHINE_NAME "3D Printer"
+#define CUSTOM_MACHINE_NAME "My 3D Printer"  //自定义打印机名称
 
 // 打印机的唯一ID，某些程序使用它来区分机器。
 // 选择自己的服务或使用类似的服务 http://www.uuidgenerator.net/version4
-//#define MACHINE_UUID "b4a5990a-6d42-4254-a794-28395c4efb7c"
+//#define MACHINE_UUID "b30cc1b9-816a-4a40-b78e-6676a18c8abd"  //设置打印机ID
 
 // @挤出机
 
@@ -141,16 +140,16 @@
 #define EXTRUDERS 1  //挤出机数量
 
 // 一般的直径有（1.75, 2.85, 3.0, ...）用于体积、丝宽传感器等。
-#define DEFAULT_NOMINAL_FILAMENT_DIA 3.0
+#define DEFAULT_NOMINAL_FILAMENT_DIA 1.75
 
 // 开启多挤出机混色打印。
 //#define SINGLENOZZLE
 
 /**
- * Průša MK2型单喷嘴多材料多路复用器或者变体。
+ * Průša MK2型单喷嘴多材料多路复用器和变种。
  *
- * 该设备允许一个步进驱动器在控制板上驱动两个至八个合适的步进电机，
- * 每次一个挤压机。
+ * 该设备允许一个步进驱动器在控制板上驱动两个
+ * 至八个合适的步进电机，每次一个挤压机。
  *
  * 此选项只允许多路复用器打开工具更改。
  * 正在等待配置自定义E步的其他选项。
@@ -160,8 +159,8 @@
   // 如果需要，请在此处覆盖默认 DIO 选择器引脚。
   // 某些引脚文件可能会提供这些引脚的默认值。
   //#define E_MUX0_PIN 40  // 始终需要
-  //#define E_MUX1_PIN 42  // 需要 3 到 8 个输入
-  //#define E_MUX2_PIN 44  // 需要 5 到 8 个输入
+  //#define E_MUX1_PIN 42  // 需要3到8个步进器
+  //#define E_MUX2_PIN 44  // 需要5到8步进器
 #endif
 
 /**
@@ -178,7 +177,7 @@
 //#define SWITCHING_EXTRUDER
 #if ENABLED(SWITCHING_EXTRUDER)
   #define SWITCHING_EXTRUDER_SERVO_NR 0
-  #define SWITCHING_EXTRUDER_SERVO_ANGLES { 0, 90 } // Angles for E0, E1[, E2, E3]
+  #define SWITCHING_EXTRUDER_SERVO_ANGLES { 0, 90 } // 角为E0，E1 [，E2，E3]
   #if EXTRUDERS > 3
     #define SWITCHING_EXTRUDER_E23_SERVO_NR 1
   #endif
@@ -188,8 +187,8 @@
 //#define SWITCHING_NOZZLE
 #if ENABLED(SWITCHING_NOZZLE)
   #define SWITCHING_NOZZLE_SERVO_NR 0
-  //#define SWITCHING_NOZZLE_E1_SERVO_NR 1          // If two servos are used, the index of the second
-  #define SWITCHING_NOZZLE_SERVO_ANGLES { 0, 90 }   // Angles for E0, E1 (single servo) or lowered/raised (dual servo)
+  //#define SWITCHING_NOZZLE_E1_SERVO_NR 1          // 如果使用两个伺服，则第二个的索引
+  #define SWITCHING_NOZZLE_SERVO_ANGLES { 0, 90 }   // E0，E1（单伺服）或降低/升高（双伺服）的角度
 #endif
 
 /**
@@ -199,27 +198,27 @@
 //#define PARKING_EXTRUDER
 
 /**
- * Two separate X-carriages with extruders that connect to a moving part
- * via a magnetic docking mechanism using movements and no solenoid
+ * 两个带有挤出机的独立X架，这些挤出机连接到运动部件
+ * 通过使用运动且无电磁阀的磁性对接机制
  *
- * project   : https://www.thingiverse.com/thing:3080893
- * movements : https://youtu.be/0xCEiG9VS3k
+ * 项目   : https://www.thingiverse.com/thing:3080893
+ * 视频 : https://youtu.be/0xCEiG9VS3k
  *             https://youtu.be/Bqbcs0CU2FE
  */
 //#define MAGNETIC_PARKING_EXTRUDER
 
 #if EITHER(PARKING_EXTRUDER, MAGNETIC_PARKING_EXTRUDER)
 
-  #define PARKING_EXTRUDER_PARKING_X { -78, 184 }     // X positions for parking the extruders
-  #define PARKING_EXTRUDER_GRAB_DISTANCE 1            // (mm) Distance to move beyond the parking point to grab the extruder
-  //#define MANUAL_SOLENOID_CONTROL                   // Manual control of docking solenoids with M380 S / M381
+  #define PARKING_EXTRUDER_PARKING_X { -78, 184 }     // X 的位置，用于存放挤出机
+  #define PARKING_EXTRUDER_GRAB_DISTANCE 1            //（mm）超出停止点以抓住挤出机的距离
+  //#define MANUAL_SOLENOID_CONTROL                   // 使用M380 S / M381手动控制对接螺线管
 
   #if ENABLED(PARKING_EXTRUDER)
 
-    #define PARKING_EXTRUDER_SOLENOIDS_INVERT           // If enabled, the solenoid is NOT magnetized with applied voltage
-    #define PARKING_EXTRUDER_SOLENOIDS_PINS_ACTIVE LOW  // LOW or HIGH pin signal energizes the coil
-    #define PARKING_EXTRUDER_SOLENOIDS_DELAY 250        // (ms) Delay for magnetic field. No delay if 0 or not defined.
-    //#define MANUAL_SOLENOID_CONTROL                   // Manual control of docking solenoids with M380 S / M381
+    #define PARKING_EXTRUDER_SOLENOIDS_INVERT           // 如果启用，则螺线管不会被施加的电压磁化
+    #define PARKING_EXTRUDER_SOLENOIDS_PINS_ACTIVE LOW  // LOW或HIGH引脚信号使线圈通电
+    #define PARKING_EXTRUDER_SOLENOIDS_DELAY 250        //（ms）磁场延迟。 没有延迟（如果为0或未定义）。
+    //#define MANUAL_SOLENOID_CONTROL                   // 使用M380 S / M381手动控制对接螺线管
 
   #elif ENABLED(MAGNETIC_PARKING_EXTRUDER)
 
@@ -342,9 +341,7 @@
 //===========================================================================
 
 /**
- * --NORMAL IS 4.7kohm PULLUP!-- 1kohm pullup can be used on hotend sensor, using correct resistor and table
- *
- * 提供温度传感器:
+ * --正常情况下是 4.7千欧姆上拉电阻！-在正确的电阻和工作台上，可在热传感器上使用1000欧姆上拉电阻可用的温度传感器：
  *
  *    -5 : PT100 / PT1000 with MAX31865 (only for sensors 0-1)
  *    -3 : thermocouple with MAX31855 (only for sensors 0-1)
@@ -605,9 +602,9 @@
 #define USE_XMIN_PLUG
 #define USE_YMIN_PLUG
 #define USE_ZMIN_PLUG
-//#define USE_XMAX_PLUG
-//#define USE_YMAX_PLUG
-//#define USE_ZMAX_PLUG
+#define USE_XMAX_PLUG
+#define USE_YMAX_PLUG
+#define USE_ZMAX_PLUG
 
 // 限位开关上拉
 /**
@@ -696,10 +693,10 @@
  *
  * 如果您的探针或端止点由于噪声而错误触发，请启用。
  *
- * - Higher values may affect repeatability or accuracy of some bed probes.
- * - To fix noise install a 100nF ceramic capacitor inline with the switch.
- * - This feature is not required for common micro-switches mounted on PCBs
- *   based on the Makerbot design, which already have the 100nF capacitor.
+ * - 较高的值可能会影响某些床型探头的重复性或准确性。
+ * - 要解决噪声问题，请在开关内串联一个100nF陶瓷电容器。
+ * - 安装在PCB上的普通微动开关不需要此功能
+ *   基于Makerbot设计的，已经有100nF电容器。
  *
  * :[2,3,4,5,6,7]
  */

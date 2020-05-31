@@ -70,7 +70,7 @@
 //#define CUSTOM_VERSION_FILE Version.h // 根目录的路径（无引号）
 
 /**
- * *** 供应商请阅读***
+ * *** 供应商请阅读 ***
  *
  * Marlin允许您为图形LCD添加自定义启动映像。
  * 使用此选项，Marlin首先显示您的自定义屏幕。
@@ -123,7 +123,7 @@
 //以下定义选择您拥有的电子板。
 //请选择与您的设置匹配的boards.h中的名称
 #ifndef MOTHERBOARD
-  #define MOTHERBOARD BOARD_RAMPS_14_EFB  //定义 主机板 BOARD_RAMPS_14_EFB
+  #define MOTHERBOARD BOARD_RAMPS_14_EFB  //定义主机板 BOARD_RAMPS_14_EFB
 #endif
 
 // LCD“就绪”消息和“信息”菜单中显示的名称
@@ -160,7 +160,7 @@
   // 某些引脚文件可能会提供这些引脚的默认值。
   //#define E_MUX0_PIN 40  // 始终需要
   //#define E_MUX1_PIN 42  // 需要3到8个步进器
-  //#define E_MUX2_PIN 44  // 需要5到8步进器
+  //#define E_MUX2_PIN 44  // 需要5到8个步进器
 #endif
 
 /**
@@ -398,7 +398,7 @@
  *   998 : Dummy Table that ALWAYS reads 25°C or the temperature defined below.
  *   999 : Dummy Table that ALWAYS reads 100°C or the temperature defined below.
  */
-#define TEMP_SENSOR_0 1
+#define TEMP_SENSOR_0 1  //喷嘴温度传感器
 #define TEMP_SENSOR_1 0
 #define TEMP_SENSOR_2 0
 #define TEMP_SENSOR_3 0
@@ -406,7 +406,7 @@
 #define TEMP_SENSOR_5 0
 #define TEMP_SENSOR_6 0
 #define TEMP_SENSOR_7 0
-#define TEMP_SENSOR_BED 0
+#define TEMP_SENSOR_BED 1   //热床温度传感器
 #define TEMP_SENSOR_PROBE 0
 #define TEMP_SENSOR_CHAMBER 0
 
@@ -432,8 +432,8 @@
 #define TEMP_BED_WINDOW          1  // （°C）"温度达到"计时器的温度接近度
 #define TEMP_BED_HYSTERESIS      3  // （°C）温度接近被认为"足够接近"目标
 
-// 低于此温度的加热器将关闭
-// 因为它可能表示热敏电阻线断裂。
+// 低于此温度加热器将会关闭
+// （可能热敏电阻线损坏或者线路断裂）
 #define HEATER_0_MINTEMP   5
 #define HEATER_1_MINTEMP   5
 #define HEATER_2_MINTEMP   5
@@ -559,16 +559,16 @@
  * 注意:对于Bowden挤出机来说，这个尺寸足够大，可以进行加载/卸载。
  */
 #define PREVENT_LENGTHY_EXTRUDE
-#define EXTRUDE_MAXLENGTH 200  //设置挤出机挤出耗材的最大长度，防止误操作造成损失。
+#define EXTRUDE_MAXLENGTH 200  // 设置挤出机挤出耗材的最大长度，防止误操作造成损失。
 
 //===========================================================================
 //=============== Thermal Runaway Protection 热失控保护======================
 //===========================================================================
 
 /**
- * 热保护提供额外保护，您的打印机免受损坏和火灾。
- * Marlin始终包括安全的最低和最高温度范围，以保护损坏或断开热敏电阻线。
- * 问题:如果热敏电阻掉了，它会报告房间里的空气温度低了很多，固件会让加热器继续工作。
+ * 热保护提供额外保护，您的打印机免受损坏和预防发生火灾。
+ * Marlin始终包括安全的最低和最高温度范围，以保护损坏或断裂的热敏电阻线。
+ * 问题:如果热敏电阻断了，它会报告房间里的空气温度低了很多，固件会让加热器继续工作。
  *
  * 如果你得到“热失控”或“加热失败”的错误可以在Configuration_adv.h中优化细节
  */
@@ -1109,8 +1109,8 @@
 // @section machine
 
 // 打印台的尺寸
-#define X_BED_SIZE 200
-#define Y_BED_SIZE 200
+#define X_BED_SIZE 190
+#define Y_BED_SIZE 190
 
 /**
  * 复位坐标
@@ -1131,7 +1131,7 @@
 #define Z_MIN_POS 0
 #define X_MAX_POS X_BED_SIZE
 #define Y_MAX_POS Y_BED_SIZE
-#define Z_MAX_POS 200
+#define Z_MAX_POS 180
 
 /**
  * 软限位

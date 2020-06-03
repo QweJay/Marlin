@@ -17,7 +17,6 @@
  * 随着这个程序。如果没有，请参阅
  * <http://www.gnu.org/licenses/>。
  */
- #一次编译
 
 /**
  * Configuration.h

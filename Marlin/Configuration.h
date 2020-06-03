@@ -116,6 +116,8 @@
  * 您可以尝试 1000000 的通信速度以提高 SD 文件的传输速度。
  *
  * 参考通信速度:[2400, 9600, 19200, 38400, 57600, 115200, 250000, 500000, 1000000]
+ * 
+ * 如果新购买的触控屏出现无法给主板发送打印指令，则说明触控屏与主板的波特率不在同一频段。
  */
 #define BAUDRATE 250000   //通信波特率设置
 
@@ -146,14 +148,15 @@
 
 // @挤出机
 
-// 这定义了挤出机的数量
+// 这定义了挤出机的数量，单色机默认为1
 // :[1, 2, 3, 4, 5, 6, 7, 8]
 #define EXTRUDERS 1  //挤出机数量
 
+// 耗材线径选择
 // 一般的直径有（1.75, 2.85, 3.0, ...）用于体积、丝宽传感器等。
 #define DEFAULT_NOMINAL_FILAMENT_DIA 1.75
 
-// 开启多挤出机混色打印。
+// 开启多挤出机混色打印，所有挤出机共用一个喷嘴
 //#define SINGLENOZZLE
 
 /**
@@ -410,14 +413,14 @@
  *   999 : Dummy Table that ALWAYS reads 100°C or the temperature defined below.
  */
 #define TEMP_SENSOR_0 1  //喷嘴温度传感器
-#define TEMP_SENSOR_1 0
+#define TEMP_SENSOR_1 0  //适用2进2出机型热敏电阻100k
 #define TEMP_SENSOR_2 0
 #define TEMP_SENSOR_3 0
 #define TEMP_SENSOR_4 0
 #define TEMP_SENSOR_5 0
 #define TEMP_SENSOR_6 0
 #define TEMP_SENSOR_7 0
-#define TEMP_SENSOR_BED 1   //热床温度传感器
+#define TEMP_SENSOR_BED 1   //热床温度传感器，热敏电阻100k
 #define TEMP_SENSOR_PROBE 0
 #define TEMP_SENSOR_CHAMBER 0
 
@@ -443,8 +446,8 @@
 #define TEMP_BED_WINDOW          1  // （°C）"温度达到"计时器的温度接近度
 #define TEMP_BED_HYSTERESIS      3  // （°C）温度接近被认为"足够接近"目标
 
-// 低于此温度加热器将会关闭
-// （可能热敏电阻线损坏或者线路断裂）
+// 低温保护，低于5℃时禁止开启加热功能。
+// 低于此温度加热器将会关闭（可能热敏电阻线损坏或者线路断裂）
 // “Err：MINTEMP”：如果出现此错误表示您的热敏电阻已断开连接或断路。 （或者机器太冷了。）
 /**
  * 这些参数有助于防止打印机过热和起火。当温度传感器失效或断开连接时，温度传感器会报告异常低的值。
@@ -461,6 +464,7 @@
 #define HEATER_7_MINTEMP   5
 #define BED_MINTEMP        5
 
+// 高温保护，挤出头高于275℃（热床高于150℃）时禁止加热功能，并保护。
 // 高于此温度，加热器将关闭。
 // 这可以保护组件免受过热的影响，但不能防止短路和故障。
 //（使用 MinTEMP 进行热敏电阻短路/故障保护)。
@@ -677,12 +681,13 @@
 
 // 限位开关信号
 /**
- * X_MIN_ENDSTOP_INVERTING 等系列参数设置为 true 表示将限位开关的信号反转，针对限位开关的常开和长闭状态，如触发状态不符合预期，可在此处修正。
+ * X_MIN_ENDSTOP_INVERTING 等系列参数设置为 true 表示将限位开关的信号反转，
+ * 针对限位开关的常开和长闭状态，如触发状态不符合预期，可在此处修正。
  * Z_MIN_PROBE_ENDSTOP_INVERTING 表示自动调平使用的探针电平状态，如不时触底时才触发，可在此反转。
  * 
  * 使用M119测试这些设置是否正确。 如果未按下终点挡块时显示为“已触发”，而按下时显示为“打开”，则应在此处将其翻转。
  */
-// 机械限位开关，COM接地，NC接信号，此处使用"false"（最常见的设置）。
+// 机械限位开关，COM接地，NC接S(信号)，此处使用"false"（最常见的设置）。
 #define X_MIN_ENDSTOP_INVERTING false       // 设置为true以反转结束停止的逻辑。
 #define Y_MIN_ENDSTOP_INVERTING false       // 设置为true以反转结束停止的逻辑。
 #define Z_MIN_ENDSTOP_INVERTING false       // 设置为true以反转结束停止的逻辑。
@@ -707,22 +712,22 @@
  *          TMC5130, TMC5130_STANDALONE, TMC5160, TMC5160_STANDALONE
  * :['A4988', 'A5984', 'DRV8825', 'LV8729', 'L6470', 'L6474', 'POWERSTEP01', 'TB6560', 'TB6600', 'TMC2100', 'TMC2130', 'TMC2130_STANDALONE', 'TMC2160', 'TMC2160_STANDALONE', 'TMC2208', 'TMC2208_STANDALONE', 'TMC2209', 'TMC2209_STANDALONE', 'TMC26X', 'TMC26X_STANDALONE', 'TMC2660', 'TMC2660_STANDALONE', 'TMC5130', 'TMC5130_STANDALONE', 'TMC5160', 'TMC5160_STANDALONE']
  */
-//#define X_DRIVER_TYPE  DRV8825
-//#define Y_DRIVER_TYPE  DRV8825
+//#define X_DRIVER_TYPE  A4988
+//#define Y_DRIVER_TYPE  A4988
 //#define Z_DRIVER_TYPE  DRV8825
-//#define X2_DRIVER_TYPE DRV8825
-//#define Y2_DRIVER_TYPE DRV8825
-//#define Z2_DRIVER_TYPE DRV8825
-//#define Z3_DRIVER_TYPE DRV8825
-//#define Z4_DRIVER_TYPE DRV8825
-//#define E0_DRIVER_TYPE DRV8825
-//#define E1_DRIVER_TYPE DRV8825
-//#define E2_DRIVER_TYPE DRV8825
-//#define E3_DRIVER_TYPE DRV8825
-//#define E4_DRIVER_TYPE DRV8825
-//#define E5_DRIVER_TYPE DRV8825
-//#define E6_DRIVER_TYPE DRV8825
-//#define E7_DRIVER_TYPE DRV8825
+//#define X2_DRIVER_TYPE A4988
+//#define Y2_DRIVER_TYPE A4988
+//#define Z2_DRIVER_TYPE A4988
+//#define Z3_DRIVER_TYPE A4988
+//#define Z4_DRIVER_TYPE A4988
+//#define E0_DRIVER_TYPE A4988
+//#define E1_DRIVER_TYPE A4988
+//#define E2_DRIVER_TYPE A4988
+//#define E3_DRIVER_TYPE A4988
+//#define E4_DRIVER_TYPE A4988
+//#define E5_DRIVER_TYPE A4988
+//#define E6_DRIVER_TYPE A4988
+//#define E7_DRIVER_TYPE A4988
 
 // 如果所有使能的终端止动销都具有中断功能，则启用此功能。 这样就无需轮询中断引脚，从而节省了许多CPU周期。
 //#define ENDSTOP_INTERRUPTS_FEATURE
@@ -779,7 +784,7 @@
  * 这些取决于各种因素，包括皮带间距，皮带轮上的齿数，丝杠上的螺纹间距，微步进设置和挤出机样式。
  * 可使用 M92 覆盖
  */
-#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 4000, 500 }
+#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 5120, 500 }
 
 /**
  * 默认最大进给速率(mm/s)
@@ -1169,8 +1174,8 @@
  * 使用Marlin，您可以直接指定床的尺寸。 当Marlin与下面的移动限制有所不同时，这允许Marlin进行与床尺寸有关的额外逻辑。 
  * 如果XY滑架能够移动到床外，则可以在下面指定更大的范围。
  */
-#define X_BED_SIZE 200
-#define Y_BED_SIZE 200
+#define X_BED_SIZE 180
+#define Y_BED_SIZE 180
 
 /**
  * 复位坐标
@@ -1192,8 +1197,8 @@
 #define X_MIN_POS 0
 #define Y_MIN_POS 0
 #define Z_MIN_POS 0
-#define X_MAX_POS X_BED_SIZE
-#define Y_MAX_POS Y_BED_SIZE
+#define X_MAX_POS 180
+#define Y_MAX_POS 180
 #define Z_MAX_POS 180
 
 /**
@@ -1216,7 +1221,7 @@
 // 最小软件终端限制在最小坐标范围内的运动
 #define MIN_SOFTWARE_ENDSTOPS
 #if ENABLED(MIN_SOFTWARE_ENDSTOPS)
-  #define MIN_SOFTWARE_ENDSTOP_X
+  #define MIN_SOFTWARE_ENDSTOP_X 
   #define MIN_SOFTWARE_ENDSTOP_Y
   #define MIN_SOFTWARE_ENDSTOP_Z
 #endif

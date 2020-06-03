@@ -34,7 +34,7 @@
  *高级设置可以在Configuration_adv.h中找到
  *
  */
-#define CONFIGURATION_H_VERSION 020005
+#define CONFIGURATION_H_VERSION 020005  //配置版本
 
 //===========================================================================
 //============================= Getting Started 入门 ========================
@@ -63,8 +63,11 @@
 // 对于SCARA打印机，请从config/examples/SCARA中的配置文件开始并针对您的机器进行自定义。
 //
 
-// @栏目信息
-
+// @固件信息
+/**
+ * 将显示在Marlin启动消息中，并用于标识固件的作者（和可选变体）。 
+ * 使用此设置作为唯一标识所有自定义配置的方法。当连接到主​​机软件，板子重启和M115时，将打印启动消息。
+ */
 // 在引导期间，此版本的作者信息会打印到主机上
 #define STRING_CONFIG_H_AUTHOR "(无，默认配置)" // 谁进行了更改.
 //#define CUSTOM_VERSION_FILE Version.h // 根目录的路径（无引号）
@@ -105,7 +108,7 @@
  * 选择板上的辅助串行端口，用于与主机通信。
  * :[-1, 0, 1, 2, 3, 4, 5, 6, 7]
  */
-//#define SERIAL_PORT_2 -1
+//#define SERIAL_PORT_2 -1  //串行端口-1是USB仿真串行端口(如果可用)。
 
 /**
  * 此设置确定打印机的通信速度。
@@ -122,16 +125,25 @@
 
 //以下定义选择您拥有的电子板。
 //请选择与您的设置匹配的boards.h中的名称
+/**
+ * 最重要的设置是选择主板。固件需要知道它将在哪个板上运行，以便可以为所有引脚分配正确的功能，
+ * 并利用该板的全部功能。 错误地设置此选项将导致不可预测的结果。
+ *参照boards.h，将BOARD_RAMPS_14_EFB替换为您的主板ID。 
+ * boards.h文件包含支持的板卡的最新列表，因此如果未在其中列出您的文件，请首先进行检查。
+ */
 #ifndef MOTHERBOARD
   #define MOTHERBOARD BOARD_RAMPS_14_EFB  //定义主机板 BOARD_RAMPS_14_EFB
 #endif
 
 // LCD“就绪”消息和“信息”菜单中显示的名称
+ /**
+ * 这是显示在LCD和M115上的打印机的名称。例如，如果您将此设置为My Delta，那么当打印机启动时，LCD将显示我的Delta。
+ */ 
 #define CUSTOM_MACHINE_NAME "My 3D Printer"  //自定义打印机名称
 
 // 打印机的唯一ID，某些程序使用它来区分机器。
 // 选择自己的服务或使用类似的服务 http://www.uuidgenerator.net/version4
-//#define MACHINE_UUID "b30cc1b9-816a-4a40-b78e-6676a18c8abd"  //设置打印机ID
+#define MACHINE_UUID "b30cc1b9-816a-4a40-b78e-6676a18c8abd"  //设置打印机UUID
 
 // @挤出机
 
@@ -153,7 +165,7 @@
  *
  * 此选项只允许多路复用器打开工具更改。
  * 正在等待配置自定义E步的其他选项。
- * /
+ */
 //#define MK2_MULTIPLEXER
 #if ENABLED(MK2_MULTIPLEXER)
   // 如果需要，请在此处覆盖默认 DIO 选择器引脚。
@@ -319,7 +331,7 @@
 #if ENABLED(PSU_CONTROL)
   #define PSU_ACTIVE_HIGH false     // 为ATX设置“false”，为X-Box设置“true”
 
-  //#define PSU_DEFAULT_OFF         // 关闭电源，直到M80直接启用
+  //#define PSU_DEFAULT_OFF         // 关闭电源，直到使用M80启用（双电源供应的打印机可以启用）
   //#define PSU_POWERUP_DELAY 100   // (ms)延迟PSU升温至全功率
 
   //#define AUTO_POWER_CONTROL      // 启用PS_ON引脚的自动控制
@@ -434,6 +446,12 @@
 
 // 低于此温度加热器将会关闭
 // （可能热敏电阻线损坏或者线路断裂）
+// “Err：MINTEMP”：如果出现此错误表示您的热敏电阻已断开连接或断路。 （或者机器太冷了。）
+/**
+ * 这些参数有助于防止打印机过热和起火。当温度传感器失效或断开连接时，温度传感器会报告异常低的值。
+ * 将这些设置为机器可能会经历的最低值(以摄氏度为单位)。
+ * 室内温度范围从10 - 40C，对于不加热的热床，请将其值设为0。
+ */ 
 #define HEATER_0_MINTEMP   5
 #define HEATER_1_MINTEMP   5
 #define HEATER_2_MINTEMP   5
@@ -447,7 +465,11 @@
 // 高于此温度，加热器将关闭。
 // 这可以保护组件免受过热的影响，但不能防止短路和故障。
 //（使用 MinTEMP 进行热敏电阻短路/故障保护)。
-#define HEATER_0_MAXTEMP 275  //1号打印头的最大温度，下面以此类推
+/**
+ * 每个温度传感器的最高温度。如果Marlin读取的温度高于这些值，出于安全考虑，它会立即关闭。
+ * 对于E3D V6 挤出头，许多人使用285作为最大值。
+ */ 
+#define HEATER_0_MAXTEMP 275  //1号打印头的最大温度，下面以此类推。
 #define HEATER_1_MAXTEMP 275
 #define HEATER_2_MAXTEMP 275
 #define HEATER_3_MAXTEMP 275
@@ -455,7 +477,7 @@
 #define HEATER_5_MAXTEMP 275
 #define HEATER_6_MAXTEMP 275
 #define HEATER_7_MAXTEMP 275
-#define BED_MAXTEMP      150
+#define BED_MAXTEMP      150  //热床温度传感器最大温度。
 
 //===========================================================================
 //============================= PID Settings PID 设置 =======================
@@ -552,7 +574,7 @@
  * ***强烈建议启用此选项!***
  */
 #define PREVENT_COLD_EXTRUSION
-#define EXTRUDE_MINTEMP 170
+#define EXTRUDE_MINTEMP 170  // 设置开启挤出机的最低温度
 
 /**
  * 防止一次挤压超过EXTRUDE_MINTEMP。
@@ -570,7 +592,10 @@
  * Marlin始终包括安全的最低和最高温度范围，以保护损坏或断裂的热敏电阻线。
  * 问题:如果热敏电阻断了，它会报告房间里的空气温度低了很多，固件会让加热器继续工作。
  *
- * 如果你得到“热失控”或“加热失败”的错误可以在Configuration_adv.h中优化细节
+ * 如果你得到“热失控”或“加热失败”的错误可以在Configuration_adv.h中优化细节。
+ * 
+ * 对于不是由温度传感器松动引起的热失控错误，请尝试增大WATCH_TEMP_PERIOD或减小WATCH_TEMP_INCREASE。 
+ * 在寒冷的环境中，如果风扇在散热块上吹动，或者加热器的电阻较高，则加热速度可能会降低。
  */
 
 #define THERMAL_PROTECTION_HOTENDS // 为所有挤出机提供热保护
@@ -596,9 +621,18 @@
 //===========================================================================
 
 // @section homing
-
+/**
+ * 在开环系统中，挡块是在所有轴上确定滑架实际位置的廉价方法。 在称为“归位”的过程中，每个轴都朝一端移动，
+ * 直到触发了终点止动开关，此时机器知道该轴位于终点止动（原点）位置。 从这一点开始，
+ * 机器通过跟踪步进器已移动多远来“知道”其位置。 如果机器由于任何原因失步，则可能需要重新复位。
+ */
 // 在这里指定所有连接到任何端停止或探针的端停止连接器。几乎所有的打印机都将使用一个轴。
 // 探测将使用一个或多个额外的连接器。保留未定义的任何用于非终止和非探测的用途。
+/**
+ * 指定连接到任何终端机或探头的所有终端机连接器。 大多数打印机将使用所有三个最小插头。 
+ * 在增量计算机上，应使用所有最大插头。 探头可以共享Z min插头，也可以使用一个或多个额外的连接器。 
+ * 请勿在此处启用用于非停止和非探针目的的插头。
+ */
 #define USE_XMIN_PLUG
 #define USE_YMIN_PLUG
 #define USE_ZMIN_PLUG
@@ -609,8 +643,12 @@
 // 限位开关上拉
 /**
  * ENDSTOPPULLUPS 去掉注释的话表示所有限位开关上拉，上拉表示对应引脚悬空的情况下默认是高电平，
- * 即限位开关开路状态下是H电平状态。Makeboard系列主板必须开启此项。如注释掉此项的话，可在下面代码单独配置XYZ轴MAX和MIN限位开关上拉状态。
+ * 即限位开关开路状态下是H电平状态。Makeboard系列主板必须开启此项。如注释掉此项的话，可在下面
+ * 代码单独配置XYZ轴MAX和MIN限位开关上拉状态。
  * 如去掉 ENDSTOPPULLUP_XMAX 注释可单独开启X-MAX限位开关上拉。
+ * 
+ * 默认情况下，所有端点都启用了上拉电阻。 这对于NC开关是最好的，可以防止值“浮动”。 如果只有一些
+ * 终端挡块应具有上拉电阻，则可以禁用ENDSTOPPULLUPS并单独启用上拉电阻。
  */
 // 对所有端点启用上拉，以防止出现浮动状态
 #define ENDSTOPPULLUPS
@@ -642,8 +680,10 @@
 /**
  * X_MIN_ENDSTOP_INVERTING 等系列参数设置为 true 表示将限位开关的信号反转，针对限位开关的常开和长闭状态，如触发状态不符合预期，可在此处修正。
  * Z_MIN_PROBE_ENDSTOP_INVERTING 表示自动调平使用的探针电平状态，如不时触底时才触发，可在此反转。
+ * 
+ * 使用M119测试这些设置是否正确。 如果未按下终点挡块时显示为“已触发”，而按下时显示为“打开”，则应在此处将其翻转。
  */
-// 机械端挡块，COM接地，NC接信号，此处使用“ false”（最常见的设置）。
+// 机械限位开关，COM接地，NC接信号，此处使用"false"（最常见的设置）。
 #define X_MIN_ENDSTOP_INVERTING false       // 设置为true以反转结束停止的逻辑。
 #define Y_MIN_ENDSTOP_INVERTING false       // 设置为true以反转结束停止的逻辑。
 #define Z_MIN_ENDSTOP_INVERTING false       // 设置为true以反转结束停止的逻辑。
@@ -655,8 +695,8 @@
 /**
  * 步进驱动
  *
- * 这些设置允许Marlin调优步进驱动程序定时，并为支持它们的步进驱动程序启用高级选项。
- * 您还可以在Configuration_adv.h中重写计时选项。
+ * 这些设置允许Marlin调整步进驱动器的时序，并为支持它们的步进驱动器启用高级选项。 
+ * 您也可以在Configuration_adv.h中覆盖计时选项。
  *
  * 默认使用A4988用于未指定的驱动程序。
  *
@@ -685,7 +725,7 @@
 //#define E6_DRIVER_TYPE DRV8825
 //#define E7_DRIVER_TYPE DRV8825
 
-// 如果所有已启用的终端引脚都支持中断，则启用此功能。这将消除轮询中断插脚的需要，节省许多CPU周期。
+// 如果所有使能的终端止动销都具有中断功能，则启用此功能。 这样就无需轮询中断引脚，从而节省了许多CPU周期。
 //#define ENDSTOP_INTERRUPTS_FEATURE
 
 /**
@@ -718,6 +758,9 @@
 /**
  * 有了这个选项，每个E步进器可以有自己的因素，为以下的运动设置。
  * 如果给定的因子比挤出机的总数少，则最后一个值适用于其余的因子。
+ * 
+ * 如果您的挤出机在机械上并非全部相同，则启用DISTINCT_E_FACTORS。
+ * 使用此设置，您可以选择为每个挤出机指定不同的每毫米步数，最大进给速度和最大加速度。
  */
 //#define DISTINCT_E_FACTORS
 
@@ -728,9 +771,14 @@
  */
 
 /**
-* 电机步进数
-* 后面的四个数字 {80,80,4000,500} ，分别表示XYZ和挤出机电机的步进数。
-* XYZ电机步进公式为：(360 / 电机步距角 * 细分数 ) / (同步带齿距 * 齿数)
+ * 电机步进数
+ * 后面的四个数字 {80,80,4000,500} ，分别表示XYZ和挤出机电机的步进数。
+ * XYZ电机步进公式为：(360 / 电机步距角 * 细分数 ) / (同步带齿距 * 齿数)
+ * 
+ * 这些是您打印机最关键的设置，因为它们确定步进器将轴定位的精度。 
+ * 在这里，我们告诉固件多少个单独的步骤产生一个毫米的运动（或SCARA上的度数）。 
+ * 这些取决于各种因素，包括皮带间距，皮带轮上的齿数，丝杠上的螺纹间距，微步进设置和挤出机样式。
+ * 可使用 M92 覆盖
  */
 #define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 4000, 500 }
 
@@ -761,6 +809,12 @@
  * DEFAULT_MAX_ACCELERATION 后面的四个数字 {3000,3000,100,10000} ，
  * 分别表示XYZ和挤出机电机的最大加速度。三角洲机型的加速度可以设置的大些，
  * 其他机型小些，原则也使实际测试，在不失步的情况下设置的越大越好。
+ * 
+ * 当任何轴的速度改变时，其加速度（或减速度）（单位为mm/s/s）受当前最大加速度设置的限制。 
+ * 另请参见下面的加加速度设置，该设置指定段之间可能发生的最大瞬时速度变化。
+ * 
+ * 值3000表示轴可以在一秒内从0加速到 3000mm/m (50mm/s) 。
+ * 
  */
 #define DEFAULT_MAX_ACCELERATION      { 3000, 3000, 100, 10000 }
 
@@ -1073,7 +1127,7 @@
 
 // @section extruder
 
-// 对于直接驱动挤出机v9设置为真，对于齿轮驱动挤出机设置为假。
+// 对于直接驱动挤出机v9设置为 true ，对于齿轮驱动挤出机设置为假。
 #define INVERT_E0_DIR false
 #define INVERT_E1_DIR false
 #define INVERT_E2_DIR false
@@ -1084,12 +1138,15 @@
 #define INVERT_E7_DIR false
 
 // @section homing
-
+/**
+ * 该值将Z提升到指定的高度，然后再定位X或y。这对于防止头部撞到床上安装件(如螺丝、牛头夹等)非常有用。
+ * 这也适用于自动调平，只有当Z轴高度小于定义值时才会触发，否则Z轴将不会移动。
+ */
 //#define NO_MOTION_BEFORE_HOMING // 禁止运动，直到所有轴归位
 
-//#define UNKNOWN_Z_NO_RAISE      // 如果Z为“未知”，请勿升高Z（放下床）。 对于Z断电时掉落的床。
-
-//#define Z_HOMING_HEIGHT  4      //（mm）归零之前的最小Z高度（G28），以便在床，夹具 ...
+//#define UNKNOWN_Z_NO_RAISE      // 如果Z为“未知”，请勿升高Z（或者放下热床）。
+                                              //当Z关闭电源时，热床就会掉下来。
+//#define Z_HOMING_HEIGHT  4      //（mm）归零之前的最小Z高度（G28）。
                                   // 确保在您的Z_MAX_POS上有这么大的间隙，以防止磨削。
 
 //#define Z_AFTER_HOMING  10      //（mm）归零后要移动到的高度
@@ -1109,8 +1166,12 @@
 // @section machine
 
 // 打印台的尺寸
-#define X_BED_SIZE 190
-#define Y_BED_SIZE 190
+/**
+ * 使用Marlin，您可以直接指定床的尺寸。 当Marlin与下面的移动限制有所不同时，这允许Marlin进行与床尺寸有关的额外逻辑。 
+ * 如果XY滑架能够移动到床外，则可以在下面指定更大的范围。
+ */
+#define X_BED_SIZE 200
+#define Y_BED_SIZE 200
 
 /**
  * 复位坐标
@@ -1123,6 +1184,9 @@
  * 为复位后打印头到平台之间的距离，可将此值设置大些，G28复位后，通过G1指令，移动Z轴，
  * 使打印头接触平台后，通过M114查看当前坐标，即可知道距离是多少了。
  * 
+ * 这些值指定了机器的物理极限。 通常将[XYZ] _MIN_POS值设置为0，因为终点挡块位于床的极限位置。 
+ * [XYZ] _MAX_POS应该设置为最远的到达点。 默认情况下，这些位置也用作您的归位位置。 
+ * 但是，如果需要，可以使用MANUAL_ [XYZ] _HOME_POS选项覆盖这些选项。
  */
 
 // 归位后的行程极限（毫米），对应于挡块位置。
@@ -1143,7 +1207,11 @@
  * - 防止移动超出设定的机器范围。
  * - 如果需要，可以禁用单个轴。
  * - X和Y仅适用于笛卡尔坐标的机器。
- * - 使用“ M211”设置软件停止器的开/关或报告当前状态
+ * - 使用“ M211”设置软件停止器的开/关或报告当前状态。
+ * 
+ * 启用这些选项可将移动限制在机器的物理边界（由[XYZ] _（MIN | MAX）_POS设置）。 
+ * 例如，可以将G1 Z-100最小约束为G1 Z0。 建议启用这些选项作为安全功能。 
+ * 如果需要禁用软件停止器，请使用M211 S0。
  */
 
 // 最小软件终端限制在最小坐标范围内的运动
@@ -1196,7 +1264,7 @@
   //#define FILAMENT_RUNOUT_DISTANCE_MM 25
 
   #ifdef FILAMENT_RUNOUT_DISTANCE_MM
-    // 启用此选项可使用编码器光盘，该光盘可在灯丝移动时切换跳动销。 
+  // 启用此选项可使用编码器光盘，该光盘可在灯丝移动时切换跳动销。 
   //（请确保将FILAMENT_RUNOUT_DISTANCE_MM设置为足够大，以避免误报。）
     //#define FILAMENT_MOTION_SENSOR
   #endif
@@ -1376,13 +1444,14 @@
 // @section homing
 
 // 平台的中心在(X=0, Y=0)
+// 如果床中心位于X0 Y0，则启用此选项。 该设置影响自动原点位置
 //#define BED_CENTER_AT_0_0
 
 // 手动设置回归位置。为自动设置保留这些未定义的值。
 // 对于DELTA，这是笛卡尔打印的顶部中心。
 //#define MANUAL_X_HOME_POS 0
 //#define MANUAL_Y_HOME_POS 0
-//#define MANUAL_Z_HOME_POS 0
+//#define MANUAL_Z_HOME_POS 0  // 归位后喷嘴到打印平台的距离
 
 // 使用“ Z安全归位”避免在床区域外使用Z探针归位。
 //
@@ -1393,6 +1462,13 @@
 // - 对所有轴进行归位时，将Z探针（或喷嘴）移动到Z归位之前定义的XY点（G28）。
 // - 当Z探头位于床身区域之外时，防止Z归位。
 //
+/**
+ * 当使用G28对所有轴进行归零时，Z安全归位可通过在Z归零之前移动到定义的XY点（默认为床的中部）
+ * 来防止探头（或喷嘴）位于床身区域之外时Z归零。 作为副作用，在Z归位之前需要X和Y归位。 
+ * 如果步进驱动程序超时，将再次需要X和Y归位。
+ * 如果将探针（不是终点挡块）用于Z归位，则启用此选项。 如果使用Z终点挡块进行原点复归，
+ * 则不需要Z安全原点复归，但也可以启用Z安全原点，以使XY在原点复归后始终移动到某个自定义位置。
+ */
 //#define Z_SAFE_HOMING
 
 #if ENABLED(Z_SAFE_HOMING)
@@ -1655,6 +1731,8 @@
  *   ko_KR, nl, pl, pt, pt_br, ru, sk, tr, uk, vi, zh_CN, zh_TW, test
  *
  * :{ 'en':'English', 'an':'Aragonese', 'bg':'Bulgarian', 'ca':'Catalan', 'cz':'Czech', 'da':'Danish', 'de':'German', 'el':'Greek', 'el_gr':'Greek (Greece)', 'es':'Spanish', 'eu':'Basque-Euskera', 'fi':'Finnish', 'fr':'French', 'gl':'Galician', 'hr':'Croatian', 'it':'Italian', 'jp_kana':'Japanese', 'ko_KR':'Korean (South Korea)', 'nl':'Dutch', 'pl':'Polish', 'pt':'Portuguese', 'pt_br':'Portuguese (Brazilian)', 'ru':'Russian', 'sk':'Slovak', 'tr':'Turkish', 'uk':'Ukrainian', 'vi':'Vietnamese', 'zh_CN':'Chinese (Simplified)', 'zh_TW':'Chinese (Traditional)', 'test':'TEST' }
+ *
+ * 有关支持的语言及其国际语言代码的最新列表，请参见language.h。
  */
 #define LCD_LANGUAGE zh_CN
 
@@ -1692,7 +1770,9 @@
  * SD储存卡
  *
  * SD卡支持在默认情况下是禁用的。如果你的控制器有一个SD插槽，你必须取消注释下面的选项，否则它将无法工作。
- *
+ * 
+ * 启用以使用SD打印，无论是作为LCD控制器的一部分还是作为独立的SDCard插槽。
+ * 必须启用SDSUPPORT选项，否则将不支持SD打印。具有内置SDCard插槽的LCD控制器不再自动启用它。
  */
 #define SDSUPPORT
 
@@ -1803,7 +1883,7 @@
 //
 // Note: Usually sold with a white PCB.
 //
-//#define REPRAP_DISCOUNT_SMART_CONTROLLER
+//#define REPRAP_DISCOUNT_SMART_CONTROLLER  //启用2004液晶控制器,一个带拨轮的20 x 4字符LCD控制器。
 
 //
 // Original RADDS LCD Display+Encoder+SDCardReader
@@ -1937,8 +2017,8 @@
 //
 // 控制器类型：图形 128x64（DOGMA）
 //
-// IMPORTANT: The U8glib library is required for Graphical Display!
-//            https://github.com/olikraus/U8glib_Arduino
+// 重要: 图形显示需要U8glib库!
+// https://github.com/olikraus/U8glib_Arduino
 //
 
 //
@@ -2163,10 +2243,10 @@
 
 // @section extras
 
-// 增加FAN PWM频率以便消除PWM噪声但会增加FET/Arduino的发热
+// 增加风扇PWM频率。去除PWM噪声但会增加FET/Arduino的发热
 //#define FAST_PWM_FAN
 
-// 与加热器一样，使用软件PWM驱动风扇。 这使用了非常低的频率，不像硬件PWM那样令人讨厌。 
+// 与加热器一样，使用软件PWM驱动风扇。这使用了非常低的频率，不像硬件PWM那样令人讨厌。 
 // 另一方面，如果该频率太低，则还应该增加SOFT_PWM_SCALE。
 //#define FAN_SOFT_PWM
 

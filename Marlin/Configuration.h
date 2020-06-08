@@ -720,8 +720,8 @@
 //#define Z2_DRIVER_TYPE A4988
 //#define Z3_DRIVER_TYPE A4988
 //#define Z4_DRIVER_TYPE A4988
-//#define E0_DRIVER_TYPE A4988
-//#define E1_DRIVER_TYPE A4988
+//#define E0_DRIVER_TYPE DRV8825
+//#define E1_DRIVER_TYPE DRV8825
 //#define E2_DRIVER_TYPE A4988
 //#define E3_DRIVER_TYPE A4988
 //#define E4_DRIVER_TYPE A4988
@@ -775,7 +775,7 @@
  */
 
 /**
- * 电机步进数
+ * 电机步进数（脉冲）
  * 后面的四个数字 {80,80,4000,500} ，分别表示XYZ和挤出机电机的步进数。
  * XYZ电机步进公式为：(360 / 电机步距角 * 细分数 ) / (同步带齿距 * 齿数)
  * 
@@ -784,7 +784,7 @@
  * 这些取决于各种因素，包括皮带间距，皮带轮上的齿数，丝杠上的螺纹间距，微步进设置和挤出机样式。
  * 可使用 M92 覆盖
  */
-#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 5120, 500 }
+#define DEFAULT_AXIS_STEPS_PER_UNIT   { 88.8889, 88.8889, 3200, 657 }
 
 /**
  * 默认最大进给速率(mm/s)
@@ -796,7 +796,7 @@
  * 所以使用大细分数或者丝杆需要减小此值才能保证电机不失步。                                    
  *                                      
  */
-#define DEFAULT_MAX_FEEDRATE          { 300, 300, 5, 25 }
+#define DEFAULT_MAX_FEEDRATE          { 300, 300, 5, 20 }
 
 //#define LIMITED_MAX_FR_EDITING        // Limit edit via M203 or LCD to DEFAULT_MAX_FEEDRATE * 2
 #if ENABLED(LIMITED_MAX_FR_EDITING)
@@ -845,6 +845,8 @@
  *
  * “Jerk”指定需要加速的最小速度变化。
  * 当改变速度和方向时，如果差值小于此处设置的值，则可能瞬间发生。
+ * 
+ * //单次最大加速度的速度，小则打的细腻但是慢，大则粗糙但快。
  */
 //#define CLASSIC_JERK
 #if ENABLED(CLASSIC_JERK)
@@ -2032,6 +2034,11 @@
 #define REPRAP_DISCOUNT_FULL_GRAPHIC_SMART_CONTROLLER // 开启12864液晶屏功能,可能需要u8glib库文件。
 // u8glib下载 ：https://bintray.com/olikraus/u8glib/Arduino
 //
+// 如果12864出现花屏现象请取消以下注释
+#define ST7920_DELAY_1 DELAY_NS(0)                    
+#define ST7920_DELAY_2 DELAY_NS(200)        //花屏情况改变这个数值，每次增大50，我看到有大神用到400才解决问题
+#define ST7920_DELAY_3 DELAY_NS(0)    
+
 // ReprapWorld Graphical LCD
 // https://reprapworld.com/?products_details&products_id/1218
 //
